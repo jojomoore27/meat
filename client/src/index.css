@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #183222;
+    --color-accent: #2a5e37;
+    --color-earth: #8b5e3c;
+    --color-sand: #d2b99b;
+    --color-cream: #faf8f5;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-farm-cream text-farm-charcoal transition-colors duration-200 antialiased;
+  }
+
+  .dark body, body.dark {
+    @apply bg-[#0e1410] text-[#e8eee9];
+  }
+}
+
+/* Custom editorial typography styles */
+.font-display {
+  font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+}
+
+/* Glassmorphism utility */
+.glass-header {
+  background: rgba(250, 248, 245, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass-header {
+  background: rgba(14, 20, 16, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1ede4;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #151a17;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a5e37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #183222;
+}
+
+/* Subtle texture gradient for luxury farm appeal */
+.bg-earth-gradient {
+  background: linear-gradient(135deg, #183222 0%, #2a5e37 60%, #1c3d28 100%);
+}
+
+.bg-dark-surface {
+  background: #151c17;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Pulse badge animation */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-subtle-pulse {
+  animation: subtlePulse 3s infinite ease-in-out;
+}

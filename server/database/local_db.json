@@ -1,0 +1,628 @@
+{
+  "admins": [
+    {
+      "id": "217d1085-0913-4647-b68d-04e95e6a8150",
+      "username": "admin",
+      "email": "admin@bestgrassfedcattle.com",
+      "password_hash": "$2a$12$ygywgzq/V0dn/2Vk.IcM0eZz0AgEY8pVMLIKAdtQUPH9GDYR4l15W",
+      "role": "superadmin"
+    }
+  ],
+  "categories": [
+    {
+      "id": "2e26ffe7-3869-4433-bc5a-b6e694c961d6",
+      "name": "T-Bone / Porterhouse (tenderloin incl.)",
+      "slug": "t-bone-porterhouse",
+      "description": "Prime bone-in T-Bone and Porterhouse cuts with tenderloin included.",
+      "sort_order": 1,
+      "is_active": null
+    },
+    {
+      "id": "57f9663d-9a46-4d6c-8d84-e6bb47eaa01a",
+      "name": "New York Strip Steaks",
+      "slug": "new-york-strip-steaks",
+      "description": "Tender, robustly marbled New York strip steaks dry-aged for rich flavor.",
+      "sort_order": 2,
+      "is_active": 1
+    },
+    {
+      "id": "5064d6a4-90aa-439b-bbbb-ebd7b4120fa0",
+      "name": "Sirloin Steaks",
+      "slug": "sirloin-steaks",
+      "description": "Lean, intensely flavorful top sirloin steaks cut fresh from pasture cattle.",
+      "sort_order": 3,
+      "is_active": 1
+    },
+    {
+      "id": "44c343af-7214-4fc3-a3ca-fa4509f94557",
+      "name": "Round Steaks",
+      "slug": "round-steaks",
+      "description": "Lean, versatile round steaks excellent for marinating, searing, and braising.",
+      "sort_order": 4,
+      "is_active": 1
+    },
+    {
+      "id": "379143ca-a8a8-458f-89a9-1c2914f48205",
+      "name": "Flat Iron / Chuck Steaks",
+      "slug": "flat-iron-chuck-steaks",
+      "description": "Exceptionally tender flat iron and artisanal chuck steaks with rich marbling.",
+      "sort_order": 5,
+      "is_active": 1
+    },
+    {
+      "id": "6308291e-6f89-485a-96ae-9e5edd66cb31",
+      "name": "Flank / Skirt Steak",
+      "slug": "flank-skirt-steak",
+      "description": "Prized chef cuts with distinct grain, phenomenal sear, and deep pasture umami.",
+      "sort_order": 6,
+      "is_active": 1
+    },
+    {
+      "id": "293c7f51-1fbf-4b6d-81ba-3e8fc9c8d2ef",
+      "name": "Chuck Roasts",
+      "slug": "chuck-roasts",
+      "description": "Classic well-marbled chuck roasts perfect for slow braising and pot roasts.",
+      "sort_order": 7,
+      "is_active": 1
+    },
+    {
+      "id": "86fe85e4-93a9-4e1a-8211-21125f457c38",
+      "name": "Rump / Round Roasts",
+      "slug": "rump-round-roasts",
+      "description": "Traditional lean roasts ideal for slow roasting, slicing thin, or deli roast beef.",
+      "sort_order": 8,
+      "is_active": 1
+    },
+    {
+      "id": "058ad740-e296-404c-8000-135315777f29",
+      "name": "Brisket",
+      "slug": "brisket",
+      "description": "Whole packer and flat briskets rich in collagen for low-and-slow barbecue smoking.",
+      "sort_order": 9,
+      "is_active": 1
+    },
+    {
+      "id": "5b5b2cd5-df82-4caf-9f4f-a494de1d9088",
+      "name": "Short Ribs",
+      "slug": "short-ribs",
+      "description": "English and flanken cut short ribs with dense marbling for succulent braises.",
+      "sort_order": 10,
+      "is_active": 1
+    },
+    {
+      "id": "e3be95de-0636-4395-ae00-6ebed5cf1cb5",
+      "name": "Stew Meat / Kabob Cubes",
+      "slug": "stew-meat-kabob-cubes",
+      "description": "Hand-trimmed bite-sized cubes for hearty stews, chili, and campfire skewers.",
+      "sort_order": 11,
+      "is_active": 1
+    },
+    {
+      "id": "07ec0236-a0a0-4491-9632-2b0a60f6af3f",
+      "name": "Shank (Osso Buco)",
+      "slug": "shank-osso-buco",
+      "description": "Cross-cut center beef shanks with marrow bone for gourmet Osso Buco.",
+      "sort_order": 12,
+      "is_active": 1
+    },
+    {
+      "id": "13d04e31-f375-481d-a7a6-bbfe140c4ddf",
+      "name": "Soup Bones / Oxtail",
+      "slug": "soup-bones-oxtail",
+      "description": "Dense marrow bones and gelatin-rich oxtail for collagen broths and hearty soups.",
+      "sort_order": 13,
+      "is_active": 1
+    },
+    {
+      "id": "4d328d1b-82a1-40de-8e22-6f6411058869",
+      "name": "Ground Beef",
+      "slug": "ground-beef",
+      "description": "Pure 100% grass-fed ground beef in balanced lean-to-fat pasture ratio.",
+      "sort_order": 14,
+      "is_active": 1
+    },
+    {
+      "id": "31aeaa63-5c10-4c59-a976-7ebedab9990a",
+      "name": "Liver",
+      "slug": "liver",
+      "description": "Nutrient-dense, iron-rich fresh beef liver from 100% pasture-grazed cattle.",
+      "sort_order": 15,
+      "is_active": 1
+    },
+    {
+      "id": "f51e0552-c8e8-4086-97ca-927388422419",
+      "name": "Heart",
+      "slug": "heart",
+      "description": "Lean, clean beef heart rich in CoQ10, minerals, and restorative nutrients.",
+      "sort_order": 16,
+      "is_active": 1
+    },
+    {
+      "id": "37f77f10-f973-4817-ae4d-ed3f01f393d5",
+      "name": "Tongue",
+      "slug": "tongue",
+      "description": "Tender, flavorful delicacy cut suitable for slow cooking and artisanal tacos.",
+      "sort_order": 17,
+      "is_active": 1
+    },
+    {
+      "id": "5571a36f-d379-46d3-a9c9-a92f856ec11d",
+      "name": "Suet / Tallow",
+      "slug": "suet-tallow",
+      "description": "Pure kidney suet and rendering-grade fat for rich cooking tallow and skincare.",
+      "sort_order": 18,
+      "is_active": 1
+    }
+  ],
+  "products": [
+    {
+      "id": "8ac798d1-8395-44db-ac12-deb1c1768bdc",
+      "name": "Dry-Aged Ribeye Steak",
+      "slug": "dry-aged-ribeye-steak",
+      "sku": "BGC-RIB-001",
+      "category_id": "2e26ffe7-3869-4433-bc5a-b6e694c961d6",
+      "price": 34.5,
+      "short_description": "21-day dry aged, rich pasture marbling, intensely flavorful and tender.",
+      "full_description": "Our signature cut. Raised entirely on upstate New York pastures with zero grain, hormones, or feedlot confinement. Aged 21 days for maximum concentration of umami and tenderness. Best prepared in a cast-iron skillet with rosemary and pasture butter.",
+      "main_image": "/uploads/farm_1791332991455_466.jpeg",
+      "additional_images": [
+        "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80"
+      ],
+      "status": "published",
+      "is_featured": 1,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "100% Grass-Fed Dry-Aged Ribeye Steak | BestGrassFedCattle",
+      "seo_description": "Order authentic 21-day dry aged grass-fed ribeye steak from our New York farm.",
+      "updated_at": "2026-10-07T00:30:28.211Z"
+    },
+    {
+      "id": "427800a8-01a7-460c-8d79-0fa7d3e5890d",
+      "name": "New York Strip Steak",
+      "slug": "new-york-strip-steak",
+      "sku": "BGC-NYS-002",
+      "category_id": "57f9663d-9a46-4d6c-8d84-e6bb47eaa01a",
+      "price": 31,
+      "short_description": "Classic American strip steak with clean, robust beef flavor and fine marbling.",
+      "full_description": "Hand-trimmed from the short loin, our New York Strip embodies what authentic grass-fed beef tastes like: clean, mineral-rich, robustly beefy with a delicate fat cap that renders beautifully under high heat.",
+      "main_image": "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 1,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "Grass-Fed New York Strip Steak | BestGrassFedCattle",
+      "seo_description": "Artisanal grass-fed New York Strip steak from New York pastures."
+    },
+    {
+      "id": "488f9544-056e-4b7c-b312-65222a3e3313",
+      "name": "Pasture-Raised Filet Mignon",
+      "slug": "pasture-raised-filet-mignon",
+      "sku": "BGC-FIL-003",
+      "category_id": "2e26ffe7-3869-4433-bc5a-b6e694c961d6",
+      "price": 42,
+      "short_description": "Melt-in-your-mouth tenderness, center-cut tenderloin with delicate sweetness.",
+      "full_description": "The most tender muscle in the steer. Because our cattle roam freely on lush clover and rye pastures, this tenderloin develops an extraordinary clean, sweet flavor profile without the muddy taste of conventional feedlot beef.",
+      "main_image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 1,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "Pasture-Raised Filet Mignon | BestGrassFedCattle",
+      "seo_description": "Center-cut grass-fed filet mignon tenderloin."
+    },
+    {
+      "id": "f7d29783-592c-4bf6-b7e3-f169926b3a0f",
+      "name": "100% Grass-Fed Ground Beef (85/15)",
+      "slug": "grass-fed-ground-beef-85-15",
+      "sku": "BGC-GRD-004",
+      "category_id": "4d328d1b-82a1-40de-8e22-6f6411058869",
+      "price": 11.5,
+      "short_description": "Freshly ground coarse blend of brisket, chuck, and round. Pure and versatile.",
+      "full_description": "Ground only from whole muscle cuts of our pasture-raised cattle. No fillers, no trimmings, no ammonia washes. Perfect for artisan burgers, bolognese, chili, and weeknight family dinners.",
+      "main_image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=800&q=80",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 1,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "100% Grass-Fed Ground Beef 85/15 | BestGrassFedCattle",
+      "seo_description": "Pure pasture-raised grass-fed ground beef."
+    },
+    {
+      "id": "8ef6dc7e-f395-48fb-9520-55ca7a4cb1b1",
+      "name": "Heritage Chuck Pot Roast",
+      "slug": "heritage-chuck-pot-roast",
+      "sku": "BGC-CHK-005",
+      "category_id": "293c7f51-1fbf-4b6d-81ba-3e8fc9c8d2ef",
+      "price": 18,
+      "short_description": "Generously marbled shoulder cut, transforms into fork-tender richness when braised.",
+      "full_description": "The centerpiece of Sunday dinners. Abundant connective tissue that gently dissolves into gelatin during slow simmering with root vegetables, red wine, and farm thyme.",
+      "main_image": "https://images.unsplash.com/photo-1588347818036-558601350947?auto=format&fit=crop&w=800&q=80",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 0,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "Grass-Fed Chuck Pot Roast | BestGrassFedCattle",
+      "seo_description": "Slow-braised heritage grass-fed chuck roast."
+    },
+    {
+      "id": "dec5ad26-a568-4a29-947e-b6b29d70c102",
+      "name": "English Cut Short Ribs",
+      "slug": "english-cut-short-ribs",
+      "sku": "BGC-RIB-006",
+      "category_id": "5b5b2cd5-df82-4caf-9f4f-a494de1d9088",
+      "price": 22,
+      "short_description": "Thick, meaty bone-in short ribs with deep beef richness.",
+      "full_description": "Cut across the rib bone into generous 3-inch portions. When braised in stock and herbs, the meat falls away effortlessly from the bone, offering unmatched richness and collagen.",
+      "main_image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 0,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "English Cut Grass-Fed Short Ribs | BestGrassFedCattle",
+      "seo_description": "Bone-in artisanal grass-fed short ribs."
+    },
+    {
+      "id": "8a903349-2524-4b8b-b157-9ca9a182cede",
+      "name": "Artisan Beef Marrow Bones & Oxtail Pack",
+      "slug": "beef-marrow-bones-oxtail-pack",
+      "sku": "BGC-BON-007",
+      "category_id": "13d04e31-f375-481d-a7a6-bbfe140c4ddf",
+      "price": 14,
+      "short_description": "Femur pipe bones and collagen-rich oxtail for deep, gelatinous bone broths.",
+      "full_description": "Grass-fed bones yield broth with exceptional depth, golden fat, and high collagen density. Roast first for caramelized richness before a 24-hour slow simmer.",
+      "main_image": "/images/artisanal_ribeye_steak.jpg",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 0,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "Grass-Fed Marrow Bones & Oxtail | BestGrassFedCattle",
+      "seo_description": "Nutrient-dense grass-fed marrow bones for roasting and broths."
+    },
+    {
+      "id": "d8d7cb54-9809-4414-9f92-5bb8b538e286",
+      "name": "Quarter Beef Share (Bulk Reserve)",
+      "slug": "quarter-beef-share-bulk",
+      "sku": "BGC-BLK-008",
+      "category_id": "e3be95de-0636-4395-ae00-6ebed5cf1cb5",
+      "price": 1250,
+      "short_description": "Approx 100-110 lbs of packaged beef: steaks, roasts, ground beef, and ribs.",
+      "full_description": "Our most economical option for families and serious food lovers. A balanced assortment of prime steaks (Ribeye, Strip, Filet), roasts (Chuck, Brisket, Sirloin Tip), braising cuts, and ground beef. Custom cut specifications available upon inquiry.",
+      "main_image": "/images/farmer_cattle_field.jpg",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 1,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "Quarter Beef Share (Bulk Order) | BestGrassFedCattle",
+      "seo_description": "Direct farm quarter beef share reserve."
+    },
+    {
+      "id": "7a68cd6c-d7e6-4dd3-a860-932ab57cfc61",
+      "name": "Soup Bones/Oxtail",
+      "slug": "soup-bonesoxtail-322",
+      "sku": "BGC-1627",
+      "category_id": "13d04e31-f375-481d-a7a6-bbfe140c4ddf",
+      "price": 28,
+      "short_description": "Beff",
+      "full_description": "",
+      "main_image": "/uploads/farm_1791326268585_306.jpg",
+      "additional_images": "[]",
+      "status": "published",
+      "is_featured": 0,
+      "cut_options": [],
+      "specifications": {},
+      "seo_title": "",
+      "seo_description": "",
+      "updated_at": "2026-10-06T22:37:55.874Z"
+    }
+  ],
+  "order_requests": [
+    {
+      "id": "1d754eea-a65d-4f45-9220-df8649f03f13",
+      "reference_no": "BGC-82656",
+      "customer_name": "Alex Morgan",
+      "email": "alex@example.com",
+      "phone": "+1 (555) 234-5678",
+      "contact_preference": "email",
+      "product_id": null,
+      "product_name": "Dry-Aged Ribeye Steak",
+      "quantity": 2,
+      "cut_preference": "1.5 inch thick cut",
+      "special_instructions": "Please double vacuum seal for freezer reserve.",
+      "additional_notes": "",
+      "status": "contacted",
+      "ip_address": null,
+      "admin_notes": "Spoke with customer. Confirmed 2x 1.5-inch cuts are aging in pasture cooler.",
+      "updated_at": "2026-10-04T17:26:54.593Z"
+    }
+  ],
+  "wholesale_requests": [
+    {
+      "id": "7b57e7db-4d10-4714-9a2c-42373f00b247",
+      "reference_no": "BGC-W83580",
+      "full_name": "Chef Marcus Vance",
+      "company_name": "Hudson Hospitality Group",
+      "business_type": "restaurant",
+      "email": "marcus@hudsonhospitality.com",
+      "phone": "+1 (555) 890-1234",
+      "location": "New York, NY",
+      "products_interested": "Dry Aged Ribeye & NY Strip",
+      "estimated_quantity": "120 lbs per week",
+      "preferred_cuts": "",
+      "purchase_frequency": "weekly",
+      "additional_requirements": "",
+      "message": "Looking for standing weekly delivery schedule for our Manhattan bistro.",
+      "status": null
+    }
+  ],
+  "contact_messages": [
+    {
+      "id": "389a1c32-3f42-42ab-b440-8050c6a8dfe5",
+      "name": "Eleanor Vance",
+      "email": "eleanor@example.com",
+      "phone": "+1 (555) 432-1098",
+      "subject": "Quarter Beef Share Inquiry",
+      "message": "Hello, what is the current harvest wait time for a quarter beef share?",
+      "is_read": "new",
+      "status": null
+    }
+  ],
+  "faqs": [
+    {
+      "id": "9ff6555f-a4c9-43ae-8883-3041a7d27f40",
+      "question": "How does the ordering process work without an online checkout?",
+      "answer": "BestGrassFedCattle operates on an authentic direct relationship model. When you click \"ORDER THIS ITEM\", you submit an order request with your desired quantity, cut thickness, and contact preference. Our farm team reviews our freshly prepared stock, reaches out to you directly via your chosen method (phone, email, WhatsApp, or Telegram) to confirm availability and logistics, and finalizes the order personally.",
+      "category": "Ordering & Requests",
+      "sort_order": 1,
+      "is_published": null
+    },
+    {
+      "id": "620a16a5-8fd1-4a27-8a10-c5ff102820c5",
+      "question": "What does 100% Grass-Fed and Grass-Finished mean?",
+      "answer": "Our cattle spend their entire lives grazing open New York pastures on a natural rotational diet of clover, orchard grass, and timothy. Unlike industrial beef, our cattle never step foot in a feedlot and are never fed grains, corn silage, antibiotics, or synthetic growth hormones.",
+      "category": "Beef & Agriculture",
+      "sort_order": 2,
+      "is_published": null
+    },
+    {
+      "id": "2d66ae00-c547-4e8b-939c-e3a774b64fbb",
+      "question": "How do Bulk & Wholesale orders work for restaurants and butchers?",
+      "answer": "Commercial establishments, caterers, and private clubs can visit our Bulk & Wholesale page to submit volume requirements (quarter steers, half steers, whole carcasses, or bulk ground beef). Our wholesale director will respond within 24 hours with wholesale volume schedules and cut sheet sheets.",
+      "category": "Wholesale & B2B",
+      "sort_order": 3,
+      "is_published": null
+    },
+    {
+      "id": "546e4f99-5e67-4d0c-ad9e-abfca179a3fc",
+      "question": "Can I request custom cut thicknesses or bone-in options?",
+      "answer": "Yes! When submitting an order request for steaks or roasts, select your preferred thickness or specify custom requirements in the \"Special Instructions\" box. Our butcher cuts to order.",
+      "category": "Cuts & Butchery",
+      "sort_order": 4,
+      "is_published": null
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "f822f06a-3987-4118-85ac-6e0fb6bad049",
+      "customer_name": "Sarah & David Jenkins",
+      "customer_role": "Quarter Share Beef Customer (Westchester, NY)",
+      "quote": "We ordered a quarter beef share for our deep freezer. Every single cut—from the ground beef to the tenderloin roasts—has been exceptional. The direct communication made everything seamless.",
+      "photo_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
+      "is_featured": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "f376d74d-a57f-43ce-9db4-6d805f6513b6",
+      "customer_name": "Executive Chef Marcus Vance",
+      "customer_role": "Manhattan Farm-to-Table Hospitality Group",
+      "quote": "The marbling and mineral clean finish on BestGrassFedCattle’s ribeye cuts set a new standard for our steak program. Our guests notice the difference immediately.",
+      "photo_url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=400&q=80",
+      "is_featured": 1,
+      "sort_order": 1
+    }
+  ],
+  "gallery_images": [
+    {
+      "id": "dc68e561-a54e-4eac-b019-f255288b0bc4",
+      "title": "Rolling Upstate New York Clover & Grasslands",
+      "image_url": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80",
+      "category": "grassland",
+      "is_featured": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "67106655-9045-4ca6-a74f-7fbb4d8f98a6",
+      "title": "Pasture Management & Rotational Fencing",
+      "image_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
+      "category": "farm",
+      "is_featured": 0,
+      "sort_order": 4
+    },
+    {
+      "id": "98d88024-1fb0-4598-b747-57c6dd5358d2",
+      "title": "Cattle Herd Grazing at Golden Hour",
+      "image_url": "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=1200&q=80",
+      "category": "cattle",
+      "is_featured": 1,
+      "sort_order": 5
+    },
+    {
+      "id": "a03c4e9d-c3f2-429a-ac5d-a1e40bd9f062",
+      "title": "Butcher Cut Inspection & Marbling Check",
+      "image_url": "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1200&q=80",
+      "category": "behind_scenes",
+      "is_featured": 0,
+      "sort_order": 6
+    },
+    {
+      "id": "c273f484-9995-474f-a0b5-b7f80bc98b04",
+      "title": "Black Angus Cattle Grazing in Morning Pasture",
+      "image_url": "/images/hero_cattle_pasture.jpg",
+      "category": "cattle",
+      "is_featured": 1,
+      "sort_order": 1
+    },
+    {
+      "id": "7e882772-3e0a-423e-a0fc-69021bd5a904",
+      "title": "Artisanal Dry-Aged Ribeye Hand Trimmed",
+      "image_url": "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=1200&q=80",
+      "category": "beef",
+      "is_featured": 1,
+      "sort_order": 3
+    }
+  ],
+  "media_library": [
+    {
+      "id": "a73415e8-61b6-4aaf-b5e4-d441d0297f00",
+      "file_name": "device_photo.jpg",
+      "file_url": "/uploads/farm_1791324023243_647.jpg",
+      "file_type": "image/jpeg",
+      "file_size": 27,
+      "tags": ""
+    },
+    {
+      "id": "dba27ce0-ec4a-4b94-b431-ffe97c22f0d0",
+      "file_name": "photo_2026-06-24_00-30-39.jpg",
+      "file_url": "/uploads/farm_1791324143604_521.jpg",
+      "file_type": "image/jpeg",
+      "file_size": 49768,
+      "tags": ""
+    },
+    {
+      "id": "49db2459-0d3d-4e36-bf0c-3c7fe8c38d00",
+      "file_name": "photo_2026-06-24_00-30-39.jpg",
+      "file_url": "/uploads/farm_1791324374802_583.jpg",
+      "file_type": "image/jpeg",
+      "file_size": 49768,
+      "tags": ""
+    },
+    {
+      "id": "b6ff2e85-5f7d-4ae9-ba6d-5b1006d0dbd2",
+      "file_name": "photo_2026-06-24_00-30-39.jpg",
+      "file_url": "/uploads/farm_1791326268585_306.jpg",
+      "file_type": "image/jpeg",
+      "file_size": 49768,
+      "tags": ""
+    },
+    {
+      "id": "2c3027ba-b6a0-4ec3-b775-dada0314ad33",
+      "file_name": "WhatsApp Image 2026-10-04 at 22.54.31.jpeg",
+      "file_url": "/uploads/farm_1791332991455_466.jpeg",
+      "file_type": "image/jpeg",
+      "file_size": 174568,
+      "tags": ""
+    }
+  ],
+  "site_settings": [
+    {
+      "id": "default",
+      "business_name": "BestGrassFedCattle",
+      "tagline": "Premium Grass-Fed Beef, Raised With Purpose.",
+      "location": "New York, United States",
+      "currency": "USD ($)",
+      "contact_email": "grassfed@gmail.com",
+      "contact_phone": "+1 (305) 213-2655",
+      "address": "Upstate Pastures, New York, United States",
+      "social_links": {
+        "instagram": "https://instagram.com/bestgrassfedcattle",
+        "facebook": "https://facebook.com/bestgrassfedcattle"
+      },
+      "brand_description": "Ethically raised 100% grass-fed and grass-finished cattle from pristine New York pastures.",
+      "theme_default": "system"
+    }
+  ],
+  "cms_content": [
+    {
+      "id": "home_hero",
+      "page_key": "home",
+      "section_key": "hero",
+      "content_json": "{\"headline\":\"Premium Grass-Fed Beef, Raised With Purpose.\",\"subheadline\":\"Quality beef from carefully raised cattle in New York, presented with the care and standards customers expect from a premium American beef brand.\",\"ctaPrimaryText\":\"Explore Our Beef\",\"ctaSecondaryText\":\"Order Beef\",\"heroImage\":\"/images/hero_cattle_pasture.jpg\"}"
+    },
+    {
+      "id": "home_trust",
+      "page_key": "home",
+      "section_key": "trust",
+      "content_json": "{\"badge1_title\":\"100% Grass-Fed Focus\",\"badge1_desc\":\"Rotational grazing on pristine New York clover and rye pastures.\",\"badge2_title\":\"Carefully Selected Beef\",\"badge2_desc\":\"Meticulously dry-aged and hand-trimmed artisanal cuts.\",\"badge3_title\":\"Direct Farm Relationship\",\"badge3_desc\":\"Zero retail middlemen; personal consultation on every cut.\",\"badge4_title\":\"Bulk & Wholesale Ready\",\"badge4_desc\":\"Equipped to serve restaurants, butchers, and private quarters.\"}"
+    }
+  ],
+  "notification_settings": [
+    {
+      "id": "default",
+      "admin_dashboard_enabled": 1,
+      "email_enabled": 0,
+      "email_recipient": "grassfed@gmail.com",
+      "smtp_host": "",
+      "smtp_port": 587,
+      "smtp_user": "",
+      "smtp_password": "",
+      "smtp_secure": 0,
+      "telegram_enabled": 0,
+      "telegram_bot_token": "",
+      "telegram_chat_id": "",
+      "whatsapp_enabled": 0,
+      "whatsapp_phone_id": "",
+      "whatsapp_access_token": "",
+      "whatsapp_recipient_phone": "13052132655",
+      "livechat_enabled": 0
+    }
+  ],
+  "admin_notifications": [
+    {
+      "id": "71e8f20a-944b-4768-92be-89c0dbd14243",
+      "title": "🥩 New Order Request: BGC-82656 (Dry-Aged Ribeye Steak)",
+      "message": "NEW BESTGRASSFEDCATTLE ORDER REQUEST\nRequest: BGC-82656\nCustomer: Alex Morgan\nProduct: Dry-Aged Ribeye Steak\nQuantity: 2\nCut Preference: 1.5 inch thick cut\nContact Method: email\nEmail: alex@example.com\nPhone: +1 (555) 234-5678\nSpecial Instructions: Please double vacuum seal for freezer reserve.\nNotes: None\nStatus: New Request",
+      "type": "order_request",
+      "is_read": null
+    },
+    {
+      "id": "25b06c84-65a1-43f4-a1fb-fee493253d08",
+      "title": "🏢 New Wholesale Inquiry: BGC-W83580 (Hudson Hospitality Group)",
+      "message": "NEW WHOLESALE/BULK BEEF REQUEST\nReference: BGC-W83580\nCompany: Hudson Hospitality Group (restaurant)\nContact: Chef Marcus Vance\nEmail: marcus@hudsonhospitality.com\nPhone: +1 (555) 890-1234\nLocation: New York, NY\nProducts Interested: Dry Aged Ribeye & NY Strip\nEstimated Quantity: 120 lbs per week\nPurchase Frequency: weekly\nMessage: Looking for standing weekly delivery schedule for our Manhattan bistro.",
+      "type": "wholesale_request",
+      "is_read": null
+    },
+    {
+      "id": "6019fc79-63e0-42d9-a06e-191b90ad61f7",
+      "title": "📩 New Farm Contact Message: Quarter Beef Share Inquiry",
+      "message": "NEW CONTACT MESSAGE\nFrom: Eleanor Vance (eleanor@example.com)\nPhone: +1 (555) 432-1098\nSubject: Quarter Beef Share Inquiry\nMessage: Hello, what is the current harvest wait time for a quarter beef share?",
+      "type": "contact",
+      "is_read": null
+    }
+  ],
+  "notification_logs": [
+    {
+      "id": "451a5bf8-946c-4e29-8d19-fdfe6806ec32",
+      "event_type": "order_request",
+      "reference_no": "BGC-82656",
+      "channel": "dashboard",
+      "status": "sent",
+      "error_message": null,
+      "payload": "{\"id\":\"1d754eea-a65d-4f45-9220-df8649f03f13\",\"reference_no\":\"BGC-82656\",\"customer_name\":\"Alex Morgan\",\"email\":\"alex@example.com\",\"phone\":\"+1 (555) 234-5678\",\"contact_preference\":\"email\",\"product_name\":\"Dry-Aged Ribeye Steak\",\"quantity\":2,\"cut_preference\":\"1.5 inch thick cut\",\"special_instructions\":\"Please double vacuum seal for freezer reserve.\",\"additional_notes\":\"\",\"status\":\"new\"}"
+    },
+    {
+      "id": "6aeaeb29-f7d6-482e-8f02-565bd69b6b68",
+      "event_type": "wholesale_request",
+      "reference_no": "BGC-W83580",
+      "channel": "dashboard",
+      "status": "sent",
+      "error_message": null,
+      "payload": "{\"id\":\"7b57e7db-4d10-4714-9a2c-42373f00b247\",\"reference_no\":\"BGC-W83580\",\"full_name\":\"Chef Marcus Vance\",\"company_name\":\"Hudson Hospitality Group\",\"business_type\":\"restaurant\",\"email\":\"marcus@hudsonhospitality.com\",\"phone\":\"+1 (555) 890-1234\",\"location\":\"New York, NY\",\"products_interested\":\"Dry Aged Ribeye & NY Strip\",\"estimated_quantity\":\"120 lbs per week\",\"purchase_frequency\":\"weekly\",\"message\":\"Looking for standing weekly delivery schedule for our Manhattan bistro.\"}"
+    },
+    {
+      "id": "387c0761-f459-4725-8e68-037b328acf44",
+      "event_type": "contact",
+      "reference_no": "MSG-08802",
+      "channel": "dashboard",
+      "status": "sent",
+      "error_message": null,
+      "payload": "{\"id\":\"389a1c32-3f42-42ab-b440-8050c6a8dfe5\",\"name\":\"Eleanor Vance\",\"email\":\"eleanor@example.com\",\"phone\":\"+1 (555) 432-1098\",\"subject\":\"Quarter Beef Share Inquiry\",\"message\":\"Hello, what is the current harvest wait time for a quarter beef share?\"}"
+    }
+  ]
+}
