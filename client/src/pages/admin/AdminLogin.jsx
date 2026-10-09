@@ -4,8 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import { Lock, User, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('Password123!');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -55,7 +55,7 @@ export default function AdminLogin() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                Username or Admin Email
+                Admin Email or Username
               </label>
               <div className="relative">
                 <User className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -64,7 +64,7 @@ export default function AdminLogin() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="admin"
+                  placeholder="admin@example.com"
                   className="w-full pl-10 pr-3.5 py-2.5 bg-gray-50 dark:bg-[#1a221d] border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-farm-grass text-farm-charcoal dark:text-white"
                 />
               </div>
@@ -95,7 +95,7 @@ export default function AdminLogin() {
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Verifying...
+                  Verifying Credentials...
                 </>
               ) : (
                 <>
@@ -106,13 +106,10 @@ export default function AdminLogin() {
             </button>
           </form>
 
-          {/* Development Default Credentials Box */}
-          <div className="p-3 bg-farm-cream dark:bg-white/5 rounded-xl border border-farm-sand/40 text-[11px] text-gray-600 dark:text-gray-400">
-            <strong>Default Setup Credentials:</strong>
-            <div className="mt-1 font-mono text-farm-forest dark:text-farm-sand">
-              User: <span className="font-bold">admin</span> | Pass: <span className="font-bold">Password123!</span>
-            </div>
-            <div className="text-[10px] text-gray-400 mt-1">Can be changed in Admin &rarr; Site Settings</div>
+          {/* Supabase Security Badge */}
+          <div className="flex items-center justify-center gap-2 text-[11px] text-gray-500 dark:text-gray-400 pt-1">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Secured with Supabase Authentication</span>
           </div>
         </div>
 
