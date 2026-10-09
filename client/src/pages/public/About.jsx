@@ -15,7 +15,7 @@ export default function About() {
           Grass-Fed Beef, Raised With Integrity
         </h1>
         <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed font-light">
-          Founded on the principle that exceptional beef begins with healthy soil, pristine water, and cattle that spend their entire lives on open New York pastures.
+          Founded on the principle that exceptional beef begins with healthy soil, pristine water, and cattle that spend their entire lives on open Kansas pastures.
         </p>
       </div>
 
@@ -23,7 +23,7 @@ export default function About() {
       <div className="rounded-3xl overflow-hidden shadow-2xl border border-farm-sand/40 dark:border-white/5 aspect-[21/9]">
         <img
           src="/images/hero_cattle_pasture.jpg"
-          alt="Rolling pasture hills in Upstate New York"
+          alt="Rolling pasture hills in Kansas"
           onError={(e) => {
             e.currentTarget.onerror = null;
             e.currentTarget.src = 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1600&q=85';
@@ -81,7 +81,7 @@ export default function About() {
             Why Grass-Fed Beef Tastes Better & Feels Different
           </h2>
           <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-light">
-            When beef is raised on natural forage, the meat develops an authentic, clean flavor profile that reflects the terroir of New York grasslands. The fat is clean, delicate, and packed with fat-soluble vitamins, CLA (conjugated linoleic acid), and balanced Omega-3 to Omega-6 ratios.
+            When beef is raised on natural forage, the meat develops an authentic, clean flavor profile that reflects the terroir of Kansas grasslands. The fat is clean, delicate, and packed with fat-soluble vitamins, CLA (conjugated linoleic acid), and balanced Omega-3 to Omega-6 ratios.
           </p>
           <div className="pt-2">
             <Link
@@ -97,7 +97,7 @@ export default function About() {
         <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
           <img
             src="/images/farmer_cattle_field.jpg"
-            alt="American cattle farmer with grazing herd in New York pasture"
+            alt="American cattle farmer with grazing herd in Kansas pasture"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = '/images/hero_cattle_pasture.jpg';

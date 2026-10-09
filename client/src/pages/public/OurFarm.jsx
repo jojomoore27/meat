@@ -9,13 +9,13 @@ export default function OurFarm() {
       {/* Page Header */}
       <div className="text-center max-w-3xl mx-auto">
         <span className="text-xs font-semibold uppercase tracking-widest text-farm-grass dark:text-farm-sand">
-          Upstate New York Pastures
+          Kansas Pastures
         </span>
         <h1 className="font-display text-4xl sm:text-5xl font-bold text-farm-forest dark:text-white mt-2 mb-4">
           Our Farm & Land Stewardship
         </h1>
         <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed font-light">
-          Rooted in the fertile rolling hills of New York. We manage our pastures with a holistic dedication to biological soil fertility, native flora, and low-stress cattle handling.
+          Rooted in the fertile rolling pastures of Kansas. We manage our pastures with a holistic dedication to biological soil fertility, native flora, and low-stress cattle handling.
         </p>
       </div>
 
@@ -65,7 +65,7 @@ export default function OurFarm() {
         <div className="rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
           <img
             src="/images/hero_cattle_pasture.jpg"
-            alt="New York cattle pasture grazing"
+            alt="Kansas cattle pasture grazing"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=1000&q=80';
@@ -76,7 +76,7 @@ export default function OurFarm() {
         <div className="rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
           <img
             src="/images/farmer_cattle_field.jpg"
-            alt="American cattle farmer with grazing cattle in New York pasture"
+            alt="American cattle farmer with grazing cattle in Kansas pasture"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = '/images/hero_cattle_pasture.jpg';

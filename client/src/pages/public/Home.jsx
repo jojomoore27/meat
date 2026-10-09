@@ -64,7 +64,7 @@ export default function Home() {
 
   const heroContent = cmsData?.sections?.home_hero || {
     headline: 'Premium Grass-Fed Beef, Raised With Purpose.',
-    subheadline: 'Quality beef from carefully raised cattle in New York, presented with the care and standards customers expect from a premium American beef brand.',
+    subheadline: 'Quality beef from carefully raised cattle in Kansas, presented with the care and standards customers expect from a premium American beef brand.',
     ctaPrimaryText: 'Explore Our Beef',
     ctaSecondaryText: 'Order Beef',
     heroImage: '/images/hero_cattle_pasture.jpg'
@@ -72,7 +72,7 @@ export default function Home() {
 
   const trustContent = cmsData?.sections?.home_trust || {
     badge1_title: '100% Grass-Fed Focus',
-    badge1_desc: 'Rotational grazing on pristine New York clover and rye pastures.',
+    badge1_desc: 'Rotational grazing on pristine Kansas clover and rye pastures.',
     badge2_title: 'Carefully Selected Beef',
     badge2_desc: 'Meticulously dry-aged and hand-trimmed artisanal cuts.',
     badge3_title: 'Direct Farm Relationship',
@@ -90,7 +90,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <img
             src={heroContent.heroImage || '/images/hero_cattle_pasture.jpg'}
-            alt="Cattle grazing in New York pastures"
+            alt="Cattle grazing in Kansas pastures"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = '/images/hero_cattle_pasture.jpg';
@@ -105,7 +105,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-farm-sand text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 animate-fadeIn">
             <Sparkles className="w-4 h-4 text-farm-sand" />
-            Ethically Raised in New York, United States
+            Ethically Raised in Kansas, United States
           </div>
 
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1] drop-shadow-md">
@@ -313,10 +313,10 @@ export default function Home() {
                 The Heritage Difference
               </span>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-farm-forest dark:text-white leading-tight">
-                Raised on New York Pastures, As Nature Intended.
+                Raised on Kansas Pastures, As Nature Intended.
               </h2>
               <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed font-light">
-                Industrial beef is fattened quickly on feedlots with grain, corn silage, and growth accelerators. At BestGrassFedCattle, our cattle roam freely on lush Upstate New York grasslands, grazing a diverse rotational diet of clover, orchard grass, and timothy.
+                Industrial beef is fattened quickly on feedlots with grain, corn silage, and growth accelerators. At BestGrassFedCattle, our cattle roam freely on lush Kansas grasslands, grazing a diverse rotational diet of clover, orchard grass, and timothy.
               </p>
               
               <div className="space-y-3.5 pt-2">
@@ -367,7 +367,7 @@ export default function Home() {
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-[#151c17]">
                 <img
                   src="/images/farmer_cattle_field.jpg"
-                  alt="American cattle farmer with grazing herd in New York"
+                  alt="American cattle farmer with grazing herd in Kansas"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src = '/images/hero_cattle_pasture.jpg';

@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
         <section>
           <h2 className="text-lg font-display font-semibold text-farm-forest dark:text-white">1. Direct Relationship Model</h2>
           <p>
-            BestGrassFedCattle ("we", "our", "us") values your privacy. We operate an order-request and inquiry business model based in New York, United States. We do not operate an automated online checkout, and we do not collect, store, or process credit card numbers or financial account information on this website.
+            BestGrassFedCattle ("we", "our", "us") values your privacy. We operate an order-request and inquiry business model based in Kansas, United States. We do not operate an automated online checkout, and we do not collect, store, or process credit card numbers or financial account information on this website.
           </p>
         </section>
 

@@ -2,7 +2,7 @@ BESTGRASSFEDCATTLE — MASTER PRODUCTION BUILD PROMPT
 ROLE
 You are an expert senior full-stack engineer, UI/UX designer, product designer, database architect, security engineer, and QA engineer.
 
-Build a real, production-ready, professional website for BestGrassFedCattle, a premium grass-fed cattle/beef business based in New York, United States.
+Build a real, production-ready, professional website for BestGrassFedCattle, a premium grass-fed cattle/beef business based in Kansas, United States.
 
 This is NOT a simple landing page.
 
@@ -23,7 +23,7 @@ BestGrassFedCattle
 
 Business location:
 
-New York, United States
+Kansas, United States
 
 Currency:
 

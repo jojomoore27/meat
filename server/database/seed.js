@@ -64,7 +64,7 @@ export async function seedDatabase() {
       categorySlug: 't-bone-porterhouse',
       price: 34.50,
       short_description: '21-day dry aged, rich pasture marbling, intensely flavorful and tender.',
-      full_description: 'Our signature cut. Raised entirely on upstate New York pastures with zero grain, hormones, or feedlot confinement. Aged 21 days for maximum concentration of umami and tenderness. Best prepared in a cast-iron skillet with rosemary and pasture butter.',
+      full_description: 'Our signature cut. Raised entirely on Kansas pastures with zero grain, hormones, or feedlot confinement. Aged 21 days for maximum concentration of umami and tenderness. Best prepared in a cast-iron skillet with rosemary and pasture butter.',
       main_image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=800&q=80',
       additional_images: JSON.stringify([
         'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
@@ -75,7 +75,7 @@ export async function seedDatabase() {
       cut_options: JSON.stringify([]),
       specifications: JSON.stringify({}),
       seo_title: '100% Grass-Fed Dry-Aged Ribeye Steak | BestGrassFedCattle',
-      seo_description: 'Order authentic 21-day dry aged grass-fed ribeye steak from our New York farm.'
+      seo_description: 'Order authentic 21-day dry aged grass-fed ribeye steak from our Kansas farm.'
     },
     {
       name: 'New York Strip Steak',
@@ -92,7 +92,7 @@ export async function seedDatabase() {
       cut_options: JSON.stringify([]),
       specifications: JSON.stringify({}),
       seo_title: 'Grass-Fed New York Strip Steak | BestGrassFedCattle',
-      seo_description: 'Artisanal grass-fed New York Strip steak from New York pastures.'
+      seo_description: 'Artisanal grass-fed New York Strip steak from Kansas pastures.'
     },
     {
       name: 'Pasture-Raised Filet Mignon',
@@ -228,7 +228,7 @@ export async function seedDatabase() {
     },
     {
       question: 'What does 100% Grass-Fed and Grass-Finished mean?',
-      answer: 'Our cattle spend their entire lives grazing open New York pastures on a natural rotational diet of clover, orchard grass, and timothy. Unlike industrial beef, our cattle never step foot in a feedlot and are never fed grains, corn silage, antibiotics, or synthetic growth hormones.',
+      answer: 'Our cattle spend their entire lives grazing open Kansas pastures on a natural rotational diet of clover, orchard grass, and timothy. Unlike industrial beef, our cattle never step foot in a feedlot and are never fed grains, corn silage, antibiotics, or synthetic growth hormones.',
       category: 'Beef & Agriculture',
       sort_order: 2
     },
@@ -289,7 +289,7 @@ export async function seedDatabase() {
   // 6. Seed Gallery
   const galleryData = [
     { title: 'Black Angus Cattle Grazing in Morning Pasture', category: 'cattle', url: '/images/hero_cattle_pasture.jpg', is_featured: 1, sort: 1 },
-    { title: 'Rolling Upstate New York Clover & Grasslands', category: 'grassland', url: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80', is_featured: 1, sort: 2 },
+    { title: 'Rolling Kansas Clover & Grasslands', category: 'grassland', url: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80', is_featured: 1, sort: 2 },
     { title: 'Artisanal Dry-Aged Ribeye Hand Trimmed', category: 'beef', url: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=1200&q=80', is_featured: 1, sort: 3 },
     { title: 'Pasture Management & Rotational Fencing', category: 'farm', url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80', is_featured: 0, sort: 4 },
     { title: 'Cattle Herd Grazing at Golden Hour', category: 'cattle', url: 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=1200&q=80', is_featured: 1, sort: 5 },
@@ -317,13 +317,13 @@ export async function seedDatabase() {
         'default',
         'BestGrassFedCattle',
         'Premium Grass-Fed Beef, Raised With Purpose.',
-        'New York, United States',
+        'Kansas, United States',
         'USD ($)',
         'grassfed@gmail.com',
         '+1 (305) 213-2655',
-        'Upstate New York Pastures, United States',
+        '2210 SE 21st St, Topeka, KS 66607',
         '{"instagram":"https://instagram.com/bestgrassfedcattle","facebook":"https://facebook.com/bestgrassfedcattle"}',
-        'Ethically raised 100% grass-fed and grass-finished cattle from pristine New York pastures. Direct order requests and wholesale arrangements.',
+        'Ethically raised 100% grass-fed and grass-finished cattle from pristine Kansas pastures. Direct order requests and wholesale arrangements.',
         'system'
       )
     `);
@@ -350,7 +350,7 @@ export async function seedDatabase() {
       section_key: 'hero',
       content_json: JSON.stringify({
         headline: 'Premium Grass-Fed Beef, Raised With Purpose.',
-        subheadline: 'Quality beef from carefully raised cattle in New York, presented with the care and standards customers expect from a premium American beef brand.',
+        subheadline: 'Quality beef from carefully raised cattle in Kansas, presented with the care and standards customers expect from a premium American beef brand.',
         ctaPrimaryText: 'Explore Our Beef',
         ctaSecondaryText: 'Order Beef',
         heroImage: '/images/hero_cattle_pasture.jpg'
@@ -362,7 +362,7 @@ export async function seedDatabase() {
       section_key: 'trust',
       content_json: JSON.stringify({
         badge1_title: '100% Grass-Fed Focus',
-        badge1_desc: 'Rotational grazing on pristine New York clover and rye pastures.',
+        badge1_desc: 'Rotational grazing on pristine Kansas clover and rye pastures.',
         badge2_title: 'Carefully Selected Beef',
         badge2_desc: 'Meticulously dry-aged and hand-trimmed artisanal cuts.',
         badge3_title: 'Direct Farm Relationship',

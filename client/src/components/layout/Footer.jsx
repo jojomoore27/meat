@@ -23,13 +23,13 @@ export default function Footer() {
                   BestGrassFed<span className="text-farm-sand">Cattle</span>
                 </span>
                 <span className="block text-[10px] tracking-widest text-farm-sandLight uppercase font-medium">
-                  New York • 100% Pasture Raised
+                  Kansas • 100% Pasture Raised
                 </span>
               </div>
             </Link>
 
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
-              Dedicated to ethical, rotational pasture grazing in New York. Providing exceptional artisanal beef cuts directly to households, private clubs, and commercial culinary kitchens.
+              Dedicated to ethical, rotational pasture grazing in Kansas. Providing exceptional artisanal beef cuts directly to households, private clubs, and commercial culinary kitchens.
             </p>
 
             <div className="flex items-center gap-2 text-xs text-farm-sand bg-white/5 py-2 px-3 rounded-lg border border-white/10 w-fit">
@@ -46,7 +46,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-farm-sand mt-0.5 flex-shrink-0" />
-                <span>Upstate Pastures, New York, United States</span>
+                <span>2210 SE 21st St, Topeka, KS 66607</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-farm-sand flex-shrink-0" />
@@ -81,7 +81,7 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-farm-grass" />
-            <span>&copy; {currentYear} BestGrassFedCattle. All rights reserved. New York, USA.</span>
+            <span>&copy; {currentYear} BestGrassFedCattle. All rights reserved. Topeka, Kansas, USA.</span>
           </div>
 
           <div className="flex items-center space-x-6">

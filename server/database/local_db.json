@@ -163,7 +163,7 @@
       "category_id": "2e26ffe7-3869-4433-bc5a-b6e694c961d6",
       "price": 34.5,
       "short_description": "21-day dry aged, rich pasture marbling, intensely flavorful and tender.",
-      "full_description": "Our signature cut. Raised entirely on upstate New York pastures with zero grain, hormones, or feedlot confinement. Aged 21 days for maximum concentration of umami and tenderness. Best prepared in a cast-iron skillet with rosemary and pasture butter.",
+      "full_description": "Our signature cut. Raised entirely on Kansas pastures with zero grain, hormones, or feedlot confinement. Aged 21 days for maximum concentration of umami and tenderness. Best prepared in a cast-iron skillet with rosemary and pasture butter.",
       "main_image": "/uploads/farm_1791332991455_466.jpeg",
       "additional_images": [
         "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
@@ -174,7 +174,7 @@
       "cut_options": [],
       "specifications": {},
       "seo_title": "100% Grass-Fed Dry-Aged Ribeye Steak | BestGrassFedCattle",
-      "seo_description": "Order authentic 21-day dry aged grass-fed ribeye steak from our New York farm.",
+      "seo_description": "Order authentic 21-day dry aged grass-fed ribeye steak from our Kansas farm.",
       "updated_at": "2026-10-07T00:30:28.211Z"
     },
     {
@@ -193,7 +193,7 @@
       "cut_options": [],
       "specifications": {},
       "seo_title": "Grass-Fed New York Strip Steak | BestGrassFedCattle",
-      "seo_description": "Artisanal grass-fed New York Strip steak from New York pastures."
+      "seo_description": "Artisanal grass-fed New York Strip steak from Kansas pastures."
     },
     {
       "id": "488f9544-056e-4b7c-b312-65222a3e3313",
@@ -386,7 +386,7 @@
     {
       "id": "620a16a5-8fd1-4a27-8a10-c5ff102820c5",
       "question": "What does 100% Grass-Fed and Grass-Finished mean?",
-      "answer": "Our cattle spend their entire lives grazing open New York pastures on a natural rotational diet of clover, orchard grass, and timothy. Unlike industrial beef, our cattle never step foot in a feedlot and are never fed grains, corn silage, antibiotics, or synthetic growth hormones.",
+      "answer": "Our cattle spend their entire lives grazing open Kansas pastures on a natural rotational diet of clover, orchard grass, and timothy. Unlike industrial beef, our cattle never step foot in a feedlot and are never fed grains, corn silage, antibiotics, or synthetic growth hormones.",
       "category": "Beef & Agriculture",
       "sort_order": 2,
       "is_published": null
@@ -431,7 +431,7 @@
   "gallery_images": [
     {
       "id": "dc68e561-a54e-4eac-b019-f255288b0bc4",
-      "title": "Rolling Upstate New York Clover & Grasslands",
+      "title": "Rolling Kansas Clover & Grasslands",
       "image_url": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80",
       "category": "grassland",
       "is_featured": 1,
@@ -525,16 +525,16 @@
       "id": "default",
       "business_name": "BestGrassFedCattle",
       "tagline": "Premium Grass-Fed Beef, Raised With Purpose.",
-      "location": "New York, United States",
+      "location": "Kansas, United States",
       "currency": "USD ($)",
       "contact_email": "grassfed@gmail.com",
       "contact_phone": "+1 (305) 213-2655",
-      "address": "Upstate Pastures, New York, United States",
+      "address": "2210 SE 21st St, Topeka, KS 66607",
       "social_links": {
         "instagram": "https://instagram.com/bestgrassfedcattle",
         "facebook": "https://facebook.com/bestgrassfedcattle"
       },
-      "brand_description": "Ethically raised 100% grass-fed and grass-finished cattle from pristine New York pastures.",
+      "brand_description": "Ethically raised 100% grass-fed and grass-finished cattle from pristine Kansas pastures.",
       "theme_default": "system"
     }
   ],
@@ -543,13 +543,13 @@
       "id": "home_hero",
       "page_key": "home",
       "section_key": "hero",
-      "content_json": "{\"headline\":\"Premium Grass-Fed Beef, Raised With Purpose.\",\"subheadline\":\"Quality beef from carefully raised cattle in New York, presented with the care and standards customers expect from a premium American beef brand.\",\"ctaPrimaryText\":\"Explore Our Beef\",\"ctaSecondaryText\":\"Order Beef\",\"heroImage\":\"/images/hero_cattle_pasture.jpg\"}"
+      "content_json": "{\"headline\":\"Premium Grass-Fed Beef, Raised With Purpose.\",\"subheadline\":\"Quality beef from carefully raised cattle in Kansas, presented with the care and standards customers expect from a premium American beef brand.\",\"ctaPrimaryText\":\"Explore Our Beef\",\"ctaSecondaryText\":\"Order Beef\",\"heroImage\":\"/images/hero_cattle_pasture.jpg\"}"
     },
     {
       "id": "home_trust",
       "page_key": "home",
       "section_key": "trust",
-      "content_json": "{\"badge1_title\":\"100% Grass-Fed Focus\",\"badge1_desc\":\"Rotational grazing on pristine New York clover and rye pastures.\",\"badge2_title\":\"Carefully Selected Beef\",\"badge2_desc\":\"Meticulously dry-aged and hand-trimmed artisanal cuts.\",\"badge3_title\":\"Direct Farm Relationship\",\"badge3_desc\":\"Zero retail middlemen; personal consultation on every cut.\",\"badge4_title\":\"Bulk & Wholesale Ready\",\"badge4_desc\":\"Equipped to serve restaurants, butchers, and private quarters.\"}"
+      "content_json": "{\"badge1_title\":\"100% Grass-Fed Focus\",\"badge1_desc\":\"Rotational grazing on pristine Kansas clover and rye pastures.\",\"badge2_title\":\"Carefully Selected Beef\",\"badge2_desc\":\"Meticulously dry-aged and hand-trimmed artisanal cuts.\",\"badge3_title\":\"Direct Farm Relationship\",\"badge3_desc\":\"Zero retail middlemen; personal consultation on every cut.\",\"badge4_title\":\"Bulk & Wholesale Ready\",\"badge4_desc\":\"Equipped to serve restaurants, butchers, and private quarters.\"}"
     }
   ],
   "notification_settings": [

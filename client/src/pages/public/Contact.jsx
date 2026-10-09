@@ -17,7 +17,7 @@ export default function Contact() {
             <MapPin className="w-5 h-5 text-farm-sand mt-0.5 flex-shrink-0" />
             <div>
               <strong className="block text-white font-medium">Farm Location</strong>
-              <span>Upstate Pastures, New York, United States</span>
+              <span>2210 SE 21st St, Topeka, KS 66607</span>
             </div>
           </li>
 

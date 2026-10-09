@@ -106,7 +106,7 @@ export default function Faqs() {
           Still Have a Specific Question?
         </h3>
         <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 max-w-md mx-auto">
-          Our New York farm team is always ready to talk beef cuts, aging, or order arrangements directly with you.
+          Our Kansas farm team is always ready to talk beef cuts, aging, or order arrangements directly with you.
         </p>
         <div className="pt-2 flex justify-center gap-4">
           <Link

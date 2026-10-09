@@ -52,7 +52,7 @@ export default function Header({ onOpenSearch }) {
                   BestGrassFed<span className="text-farm-grass dark:text-farm-sand">Cattle</span>
                 </span>
                 <span className="text-[10px] tracking-widest text-farm-earth dark:text-farm-sandLight uppercase font-medium mt-0.5">
-                  New York • 100% Pasture Raised
+                  Kansas • 100% Pasture Raised
                 </span>
               </div>
             </Link>
@@ -186,7 +186,7 @@ export default function Header({ onOpenSearch }) {
                 Order Beef Now
               </Link>
               <div className="text-center text-xs text-gray-400">
-                Direct Farm Requests • New York Pastures
+                Direct Farm Requests • Kansas Pastures
               </div>
             </div>
 

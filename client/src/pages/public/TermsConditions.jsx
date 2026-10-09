@@ -40,7 +40,7 @@ export default function TermsConditions() {
         <section>
           <h2 className="text-lg font-display font-semibold text-farm-forest dark:text-white">4. No Online Payment / No Automatic Delivery</h2>
           <p>
-            This website does not accept credit card numbers or process automated electronic payments. We do not provide an automated delivery fee calculator or automated courier tracking. All fulfillment logistics are coordinated directly between the customer and our New York farm team.
+            This website does not accept credit card numbers or process automated electronic payments. We do not provide an automated delivery fee calculator or automated courier tracking. All fulfillment logistics are coordinated directly between the customer and our Kansas farm team.
           </p>
         </section>
       </div>
