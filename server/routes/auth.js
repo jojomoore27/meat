@@ -49,6 +49,16 @@ router.post('/login', loginLimiter, async (req, res, next) => {
             authProvider: 'supabase-auth',
           });
         }
+
+        if (authError) {
+          if (authError.message?.toLowerCase().includes('email not confirmed')) {
+            return res.status(401).json({
+              success: false,
+              error: 'Email is not confirmed in Supabase. In your Supabase Dashboard under Authentication > Users, please confirm this user or create a user with "Auto Confirm User" enabled.'
+            });
+          }
+          console.warn('Supabase Auth verification attempt:', authError.message);
+        }
       } catch (err) {
         console.warn('Supabase Auth verification attempt:', err.message);
       }
