@@ -59,6 +59,18 @@ export default function ImageUploadField({
     if (file) handleFile(file);
   };
 
+  const handleRemove = async () => {
+    const urlToDelete = value;
+    onChange('');
+    if (urlToDelete && (urlToDelete.includes('/uploads/') || urlToDelete.includes('/storage/v1/object/public/media/'))) {
+      try {
+        await api.deleteMediaByUrl(urlToDelete);
+      } catch (err) {
+        console.warn('Could not permanently remove media file:', err);
+      }
+    }
+  };
+
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -155,7 +167,7 @@ export default function ImageUploadField({
 
               <button
                 type="button"
-                onClick={() => onChange('')}
+                onClick={handleRemove}
                 disabled={uploading}
                 className="inline-flex items-center gap-1 px-2.5 py-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/30 text-xs font-medium rounded-lg transition-colors"
               >

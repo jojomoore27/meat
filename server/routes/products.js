@@ -1,6 +1,7 @@
 import express from 'express';
 import { query, queryOne } from '../config/db.js';
 import { requireAdmin } from '../middleware/auth.js';
+import { permanentlyDeleteMediaFile } from '../utils/fileCleanup.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
@@ -209,6 +210,11 @@ router.put('/admin/:id', requireAdmin, async (req, res, next) => {
       return res.status(404).json({ success: false, error: 'Product not found' });
     }
 
+    // If main image was changed or removed, permanently delete the old image
+    if (main_image !== undefined && existing.main_image && existing.main_image !== main_image) {
+      await permanentlyDeleteMediaFile(existing.main_image);
+    }
+
     await query(
       `UPDATE products SET
         name = $1, sku = $2, category_id = $3, price = $4, short_description = $5,
@@ -247,8 +253,28 @@ router.put('/admin/:id', requireAdmin, async (req, res, next) => {
  */
 router.delete('/admin/:id', requireAdmin, async (req, res, next) => {
   try {
+    const existing = await queryOne('SELECT * FROM products WHERE id = $1', [req.params.id]);
+    if (existing) {
+      if (existing.main_image) {
+        await permanentlyDeleteMediaFile(existing.main_image);
+      }
+      let additional = [];
+      try {
+        additional = typeof existing.additional_images === 'string'
+          ? JSON.parse(existing.additional_images || '[]')
+          : existing.additional_images;
+      } catch (e) {
+        additional = [];
+      }
+      if (Array.isArray(additional)) {
+        for (const img of additional) {
+          await permanentlyDeleteMediaFile(img);
+        }
+      }
+    }
+
     await query('DELETE FROM products WHERE id = $1', [req.params.id]);
-    res.json({ success: true, message: 'Product deleted successfully' });
+    res.json({ success: true, message: 'Product and associated images permanently deleted' });
   } catch (err) {
     next(err);
   }

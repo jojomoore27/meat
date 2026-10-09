@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { query, queryOne, supabase } from '../config/db.js';
 import { requireAdmin } from '../middleware/auth.js';
+import { permanentlyDeleteMediaFile } from '../utils/fileCleanup.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -129,30 +130,29 @@ router.delete('/:id', requireAdmin, async (req, res, next) => {
   try {
     const item = await queryOne('SELECT * FROM media_library WHERE id = $1', [req.params.id]);
     if (item && item.file_url) {
-      // Clean up Supabase storage if applicable
-      if (supabase && item.file_url.includes('/storage/v1/object/public/media/')) {
-        try {
-          const fileName = item.file_url.split('/media/').pop();
-          if (fileName) {
-            await supabase.storage.from('media').remove([fileName]);
-          }
-        } catch (delErr) {
-          console.warn('Failed to delete from Supabase storage:', delErr.message);
-        }
-      }
-
-      // Clean up local disk
-      if (item.file_url.includes('/uploads/')) {
-        const localName = item.file_url.split('/uploads/').pop();
-        const filePath = path.join(uploadDir, localName);
-        if (fs.existsSync(filePath)) {
-          fs.unlinkSync(filePath);
-        }
-      }
+      await permanentlyDeleteMediaFile(item.file_url);
+    } else {
+      await query('DELETE FROM media_library WHERE id = $1', [req.params.id]);
     }
 
-    await query('DELETE FROM media_library WHERE id = $1', [req.params.id]);
-    res.json({ success: true, message: 'Media file removed' });
+    res.json({ success: true, message: 'Media file permanently deleted' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * POST /api/media/delete-by-url (Permanently delete by file URL)
+ */
+router.post('/delete-by-url', requireAdmin, async (req, res, next) => {
+  try {
+    const { url } = req.body;
+    if (!url) {
+      return res.status(400).json({ success: false, error: 'URL is required' });
+    }
+
+    await permanentlyDeleteMediaFile(url);
+    res.json({ success: true, message: 'File permanently deleted' });
   } catch (err) {
     next(err);
   }

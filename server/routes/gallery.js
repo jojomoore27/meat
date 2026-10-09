@@ -1,6 +1,7 @@
 import express from 'express';
 import { query, queryOne } from '../config/db.js';
 import { requireAdmin } from '../middleware/auth.js';
+import { permanentlyDeleteMediaFile } from '../utils/fileCleanup.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
@@ -55,8 +56,13 @@ router.post('/admin', requireAdmin, async (req, res, next) => {
  */
 router.delete('/admin/:id', requireAdmin, async (req, res, next) => {
   try {
+    const existing = await queryOne('SELECT * FROM gallery_images WHERE id = $1', [req.params.id]);
+    if (existing && existing.image_url) {
+      await permanentlyDeleteMediaFile(existing.image_url);
+    }
+
     await query('DELETE FROM gallery_images WHERE id = $1', [req.params.id]);
-    res.json({ success: true, message: 'Gallery image removed' });
+    res.json({ success: true, message: 'Gallery image permanently deleted' });
   } catch (err) {
     next(err);
   }

@@ -108,6 +108,7 @@ export const api = {
 
   getMediaLibrary: () => request('/api/media'),
   deleteMedia: (id) => request(`/api/media/${id}`, { method: 'DELETE' }),
+  deleteMediaByUrl: (url) => request('/api/media/delete-by-url', { method: 'POST', body: JSON.stringify({ url }) }),
   uploadMedia: async (file) => {
     const formData = new FormData();
     formData.append('image', file);
