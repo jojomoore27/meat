@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import { Plus, Edit2, Trash2, X, Star, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import ImageUploadField from '../../components/ui/ImageUploadField';
+import { resolveImageUrl } from '../../utils/apiUrl';
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -167,7 +168,15 @@ export default function AdminProducts() {
                 {products.map((p) => (
                   <tr key={p.id} className="hover:bg-gray-50/50 dark:hover:bg-white/[0.02]">
                     <td className="p-4">
-                      <img src={p.main_image} alt={p.name} className="w-12 h-12 object-cover rounded-lg shadow-sm" />
+                      <img
+                        src={resolveImageUrl(p.main_image) || '/images/artisanal_ribeye_steak.jpg'}
+                        alt={p.name}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                        }}
+                        className="w-12 h-12 object-cover rounded-lg shadow-sm"
+                      />
                     </td>
                     <td className="p-4">
                       <div className="font-semibold text-farm-forest dark:text-white text-sm">{p.name}</div>

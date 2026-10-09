@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getApiUrl } from '../../utils/apiUrl';
+import { getApiUrl, resolveImageUrl } from '../../utils/apiUrl';
 import { api } from '../../services/api';
 import { Upload, Trash2, Copy, Check, FileImage, Loader2 } from 'lucide-react';
 
@@ -110,7 +110,15 @@ export default function AdminMediaLibrary() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {media.map((item) => (
               <div key={item.id} className="group relative rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 aspect-square bg-gray-50 dark:bg-black/20">
-                <img src={item.file_url} alt={item.file_name} className="w-full h-full object-cover" />
+                <img
+                  src={resolveImageUrl(item.file_url)}
+                  alt={item.file_name}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                  }}
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-2">
                   <div className="flex justify-end">
                     <button
@@ -123,7 +131,7 @@ export default function AdminMediaLibrary() {
                   <div>
                     <span className="text-[10px] text-white block truncate mb-1">{item.file_name}</span>
                     <button
-                      onClick={() => handleCopyUrl(item.file_url, item.id)}
+                      onClick={() => handleCopyUrl(resolveImageUrl(item.file_url), item.id)}
                       className="w-full py-1 bg-white/20 hover:bg-white/40 text-white rounded text-[10px] font-semibold flex items-center justify-center gap-1"
                     >
                       {copiedId === item.id ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}

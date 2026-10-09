@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { api } from '../../services/api';
 import { getWhatsAppOrderUrl } from '../../utils/whatsapp';
+import { resolveImageUrl } from '../../utils/apiUrl';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -239,7 +240,7 @@ export default function Home() {
               {/* Image & Badges */}
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/20">
                 <img
-                  src={product.main_image || '/images/artisanal_ribeye_steak.jpg'}
+                  src={resolveImageUrl(product.main_image) || '/images/artisanal_ribeye_steak.jpg'}
                   alt={product.name}
                   onError={(e) => {
                     e.currentTarget.onerror = null;

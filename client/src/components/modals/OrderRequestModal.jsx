@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, ShieldCheck, AlertCircle, Loader2 } from 'lucide-react';
 import { api } from '../../services/api';
+import { resolveImageUrl } from '../../utils/apiUrl';
 
 export default function OrderRequestModal({ product, isOpen, onClose }) {
   if (!isOpen || !product) return null;
@@ -129,7 +130,7 @@ export default function OrderRequestModal({ product, isOpen, onClose }) {
               {/* Product Summary Header Card */}
               <div className="flex items-center gap-4 p-3 bg-farm-cream dark:bg-farm-forest/20 rounded-xl border border-farm-sand/30">
                 <img
-                  src={product.main_image || '/images/artisanal_ribeye_steak.jpg'}
+                  src={resolveImageUrl(product.main_image) || '/images/artisanal_ribeye_steak.jpg'}
                   alt={product.name}
                   onError={(e) => {
                     e.currentTarget.onerror = null;

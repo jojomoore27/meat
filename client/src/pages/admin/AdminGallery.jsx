@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import { Plus, Trash2, X, Image as ImageIcon } from 'lucide-react';
 import ImageUploadField from '../../components/ui/ImageUploadField';
+import { resolveImageUrl } from '../../utils/apiUrl';
 
 export default function AdminGallery() {
   const [images, setImages] = useState([]);
@@ -74,7 +75,15 @@ export default function AdminGallery() {
           {images.map((img) => (
             <div key={img.id} className="bg-white dark:bg-[#151c17] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 shadow-sm group">
               <div className="aspect-[4/3] overflow-hidden relative">
-                <img src={img.image_url} alt={img.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                <img
+                  src={resolveImageUrl(img.image_url) || '/images/hero_cattle_pasture.jpg'}
+                  alt={img.title}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = '/images/hero_cattle_pasture.jpg';
+                  }}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                />
                 <span className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-white text-[10px] font-bold uppercase tracking-wider">
                   {img.category}
                 </span>

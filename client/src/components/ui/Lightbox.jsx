@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { resolveImageUrl } from '../../utils/apiUrl';
 
 export default function Lightbox({ images, currentIndex, isOpen, onClose, onPrev, onNext }) {
   if (!isOpen || !images || images.length === 0) return null;
@@ -42,7 +43,7 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onPrev
       {/* Main Image Container */}
       <div className="max-w-5xl max-h-[85vh] flex flex-col items-center">
         <img
-          src={current.image_url || current.url || '/images/hero_cattle_pasture.jpg'}
+          src={resolveImageUrl(current.image_url || current.url) || '/images/hero_cattle_pasture.jpg'}
           alt={current.title}
           onError={(e) => {
             e.currentTarget.onerror = null;

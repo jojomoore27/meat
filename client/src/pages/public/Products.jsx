@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Search, ShoppingBag, Filter, ArrowUpDown, Sparkles, AlertCircle } from 'lucide-react';
 import { api } from '../../services/api';
 import { getWhatsAppOrderUrl } from '../../utils/whatsapp';
+import { resolveImageUrl } from '../../utils/apiUrl';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -210,7 +211,7 @@ export default function Products() {
               {/* Image & Price */}
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/20">
                 <img
-                  src={product.main_image || '/images/artisanal_ribeye_steak.jpg'}
+                  src={resolveImageUrl(product.main_image) || '/images/artisanal_ribeye_steak.jpg'}
                   alt={product.name}
                   onError={(e) => {
                     e.currentTarget.onerror = null;

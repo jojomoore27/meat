@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Image as ImageIcon, X, Loader2, CheckCircle2, AlertCircle, Link2 } from 'lucide-react';
 import { api } from '../../services/api';
+import { resolveImageUrl } from '../../utils/apiUrl';
 
 export default function ImageUploadField({
   label = 'Main Image *',
@@ -18,17 +19,17 @@ export default function ImageUploadField({
   const handleFile = async (file) => {
     if (!file) return;
 
-    // Validate size (10MB max)
-    if (file.size > 10 * 1024 * 1024) {
-      setError('Selected image is too large. Maximum allowed size is 10MB.');
+    // Validate size (15MB max for modern phone cameras)
+    if (file.size > 15 * 1024 * 1024) {
+      setError('Selected image is too large. Maximum allowed size is 15MB.');
       return;
     }
 
-    // Validate type (by mime or extension)
+    // Validate type (by mime or extension, supporting mobile cameras and HEIC)
     const isImage = (file.type && file.type.startsWith('image/')) ||
-      /\.(jpe?g|png|webp|gif|avif|bmp|svg)$/i.test(file.name);
+      /\.(jpe?g|png|webp|gif|avif|heic|heif|bmp|svg)$/i.test(file.name);
     if (!isImage) {
-      setError('Please select a valid image file (JPEG, PNG, WebP, GIF, AVIF).');
+      setError('Please select a valid image file (JPEG, PNG, WebP, GIF, AVIF, HEIC).');
       return;
     }
 
@@ -92,11 +93,11 @@ export default function ImageUploadField({
         </button>
       </div>
 
-      {/* Hidden file input */}
+      {/* Hidden file input supporting mobile camera, gallery, and desktop */}
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/png, image/jpeg, image/jpg, image/webp, image/gif, image/avif"
+        accept="image/*,image/png,image/jpeg,image/jpg,image/webp,image/gif,image/avif,image/heic,image/heif"
         onChange={handleFileChange}
         className="hidden"
         disabled={uploading}
@@ -108,7 +109,7 @@ export default function ImageUploadField({
           {/* Image Thumbnail */}
           <div className="relative w-24 h-24 rounded-xl overflow-hidden bg-gray-200 dark:bg-black/30 border border-farm-sand/30 shadow-sm flex-shrink-0 group">
             <img
-              src={value}
+              src={resolveImageUrl(value)}
               alt="Uploaded Preview"
               onError={(e) => {
                 e.currentTarget.onerror = null;
@@ -125,7 +126,7 @@ export default function ImageUploadField({
           <div className="flex-1 min-w-0 space-y-2 text-center sm:text-left">
             <div>
               <div className="text-xs font-medium text-farm-forest dark:text-white truncate">
-                {value.startsWith('/uploads/') ? 'Direct Device Upload' : 'Custom Image'}
+                {value.includes('/uploads/') || value.includes('/storage/v1/object/') ? 'Direct Device Upload' : 'Custom Image'}
               </div>
               <div className="text-[11px] text-gray-500 font-mono truncate max-w-xs sm:max-w-md">
                 {value}
