@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getApiUrl } from '../../utils/apiUrl';
 import { api } from '../../services/api';
 import { Upload, Trash2, Copy, Check, FileImage, Loader2 } from 'lucide-react';
 
@@ -34,7 +35,7 @@ export default function AdminMediaLibrary() {
       formData.append('image', file);
 
       const token = localStorage.getItem('bgc_admin_token');
-      const response = await fetch('/api/media/upload', {
+      const response = await fetch(getApiUrl('/api/media/upload'), {
         method: 'POST',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData,

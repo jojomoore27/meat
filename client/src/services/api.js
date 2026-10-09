@@ -1,3 +1,5 @@
+import { getApiUrl } from '../utils/apiUrl';
+
 function getAuthHeader() {
   const token = localStorage.getItem('bgc_admin_token');
   return token ? { Authorization: `Bearer ${token}` } : {};
@@ -10,7 +12,7 @@ async function request(endpoint, options = {}) {
     ...options.headers,
   };
 
-  const response = await fetch(endpoint, {
+  const response = await fetch(getApiUrl(endpoint), {
     ...options,
     headers,
   });
@@ -110,7 +112,7 @@ export const api = {
     const formData = new FormData();
     formData.append('image', file);
     const token = localStorage.getItem('bgc_admin_token');
-    const response = await fetch('/api/media/upload', {
+    const response = await fetch(getApiUrl('/api/media/upload'), {
       method: 'POST',
       headers: token ? { Authorization: `Bearer ${token}` } : {},
       body: formData,

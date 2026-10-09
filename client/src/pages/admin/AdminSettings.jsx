@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getApiUrl } from '../../utils/apiUrl';
 import { api } from '../../services/api';
 import { Settings, Lock, Save, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
@@ -72,7 +73,7 @@ export default function AdminSettings() {
     setFeedback(null);
     try {
       const token = localStorage.getItem('bgc_admin_token');
-      const res = await fetch('/api/auth/password', {
+      const res = await fetch(getApiUrl('/api/auth/password'), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
