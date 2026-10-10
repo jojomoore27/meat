@@ -27,15 +27,12 @@ async function migrate() {
 
   const client = createClient(supabaseUrl, serviceKey || anonKey);
 
-  // Check bucket
-  const { data: buckets, error: bErr } = await client.storage.listBuckets();
-  if (bErr) {
-    console.error('❌ Failed to check buckets:', bErr.message);
-    return;
-  }
-
-  const hasMediaBucket = buckets.some(b => b.name === 'media');
-  if (!hasMediaBucket) {
+  // Check bucket accessibility
+  const testBuf = Buffer.from('ping');
+  const pingName = `.ping_${Date.now()}`;
+  const { data: pingData, error: pingErr } = await client.storage.from('media').upload(pingName, testBuf, { upsert: true });
+  
+  if (pingErr && (pingErr.message?.includes('not found') || pingErr.statusCode === '404')) {
     console.log('⚠️ "media" bucket does not exist in Supabase yet.');
     if (serviceKey) {
       console.log('Creating "media" bucket automatically with service role key...');
@@ -44,6 +41,13 @@ async function migrate() {
       console.log('👉 Please create the public "media" bucket in Supabase Dashboard first.');
       return;
     }
+  } else if (pingErr) {
+    console.error('❌ Cannot write to "media" bucket:', pingErr.message);
+    return;
+  } else {
+    // Clean up ping file
+    await client.storage.from('media').remove([pingName]);
+    console.log('✅ Connected to "media" bucket successfully!');
   }
 
   if (!fs.existsSync(uploadsDir)) {

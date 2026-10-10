@@ -22,38 +22,27 @@ async function checkStorage() {
   const client = createClient(supabaseUrl, activeKey);
 
   try {
-    const { data: buckets, error: listErr } = await client.storage.listBuckets();
-    if (listErr) {
-      console.error('❌ Could not list buckets:', listErr.message);
+    // 1. Direct upload test to 'media' bucket
+    const testBuffer = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
+    const testName = `test_ping_${Date.now()}.gif`;
+    const { data: upData, error: upErr } = await client.storage.from('media').upload(testName, testBuffer, {
+      contentType: 'image/gif',
+      upsert: true
+    });
+
+    if (!upErr && upData) {
+      const { data: pubData } = client.storage.from('media').getPublicUrl(testName);
+      console.log('✅ "media" bucket is active and ready for uploads!');
+      console.log('✅ Test upload succeeded! Public CDN URL:');
+      console.log(`   ${pubData.publicUrl}`);
+      // Clean up test file
+      await client.storage.from('media').remove([testName]);
+      console.log('✅ Test file cleaned up successfully.');
+      console.log('\n🎉 Supabase Storage is 100% operational and ready to receive pictures!\n');
       return;
     }
 
-    console.log(`Found ${buckets.length} storage bucket(s):`, buckets.map(b => b.name));
-
-    const mediaBucket = buckets.find(b => b.name === 'media');
-    if (mediaBucket) {
-      console.log('✅ "media" bucket is active and ready for uploads!');
-      console.log(`   Public: ${mediaBucket.public}`);
-
-      // Test upload a 1-pixel test image
-      const testBuffer = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
-      const testName = `test_ping_${Date.now()}.gif`;
-      const { data: upData, error: upErr } = await client.storage.from('media').upload(testName, testBuffer, {
-        contentType: 'image/gif',
-        upsert: true
-      });
-
-      if (!upErr && upData) {
-        const { data: pubData } = client.storage.from('media').getPublicUrl(testName);
-        console.log('✅ Test upload succeeded! Public CDN URL:');
-        console.log(`   ${pubData.publicUrl}`);
-        // Clean up test file
-        await client.storage.from('media').remove([testName]);
-        console.log('✅ Test file cleaned up successfully.');
-      } else {
-        console.warn('⚠️ Bucket exists but upload policy check failed:', upErr?.message);
-      }
-    } else {
+    if (upErr && (upErr.message?.includes('not found') || upErr.statusCode === '404')) {
       console.log('⚠️ "media" bucket does not exist yet in Supabase.');
       if (serviceKey) {
         console.log('Attempting auto-creation via Service Role key...');

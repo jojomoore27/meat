@@ -164,7 +164,7 @@
       "price": 34.5,
       "short_description": "21-day dry aged, rich pasture marbling, intensely flavorful and tender.",
       "full_description": "Our signature cut. Raised entirely on Kansas pastures with zero grain, hormones, or feedlot confinement. Aged 21 days for maximum concentration of umami and tenderness. Best prepared in a cast-iron skillet with rosemary and pasture butter.",
-      "main_image": "/uploads/farm_1791332991455_466.jpeg",
+      "main_image": "https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/farm_1791332991455_466.jpeg",
       "additional_images": [
         "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80"
@@ -312,7 +312,7 @@
       "price": 28,
       "short_description": "Beff",
       "full_description": "",
-      "main_image": "/uploads/farm_1791326268585_306.jpg",
+      "main_image": "https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/farm_1791326268585_306.jpg",
       "additional_images": "[]",
       "status": "published",
       "is_featured": 0,
@@ -490,7 +490,7 @@
     {
       "id": "dba27ce0-ec4a-4b94-b431-ffe97c22f0d0",
       "file_name": "photo_2026-06-24_00-30-39.jpg",
-      "file_url": "/uploads/farm_1791324143604_521.jpg",
+      "file_url": "https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/farm_1791324143604_521.jpg",
       "file_type": "image/jpeg",
       "file_size": 49768,
       "tags": ""
@@ -498,7 +498,7 @@
     {
       "id": "49db2459-0d3d-4e36-bf0c-3c7fe8c38d00",
       "file_name": "photo_2026-06-24_00-30-39.jpg",
-      "file_url": "/uploads/farm_1791324374802_583.jpg",
+      "file_url": "https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/farm_1791324374802_583.jpg",
       "file_type": "image/jpeg",
       "file_size": 49768,
       "tags": ""
@@ -506,7 +506,7 @@
     {
       "id": "b6ff2e85-5f7d-4ae9-ba6d-5b1006d0dbd2",
       "file_name": "photo_2026-06-24_00-30-39.jpg",
-      "file_url": "/uploads/farm_1791326268585_306.jpg",
+      "file_url": "https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/farm_1791326268585_306.jpg",
       "file_type": "image/jpeg",
       "file_size": 49768,
       "tags": ""
@@ -514,7 +514,7 @@
     {
       "id": "2c3027ba-b6a0-4ec3-b775-dada0314ad33",
       "file_name": "WhatsApp Image 2026-10-04 at 22.54.31.jpeg",
-      "file_url": "/uploads/farm_1791332991455_466.jpeg",
+      "file_url": "https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/farm_1791332991455_466.jpeg",
       "file_type": "image/jpeg",
       "file_size": 174568,
       "tags": ""

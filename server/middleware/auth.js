@@ -1,9 +1,11 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'bgc-super-secret-key-prod-9834289';
+function getJwtSecret() {
+  return process.env.JWT_SECRET || 'bgc-super-secret-key-prod-9834289';
+}
 
 export function signToken(payload) {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign(payload, getJwtSecret(), { expiresIn: '7d' });
 }
 
 export function requireAdmin(req, res, next) {
@@ -21,7 +23,7 @@ export function requireAdmin(req, res, next) {
       return res.status(401).json({ success: false, error: 'Unauthorized: Admin authentication token required' });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, getJwtSecret());
     req.admin = decoded;
     next();
   } catch (err) {
