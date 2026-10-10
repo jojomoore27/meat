@@ -9,7 +9,9 @@
     "start": "node index.js",
     "dev": "node index.js",
     "seed": "node database/seed.js",
-    "create-admin": "node scripts/create-admin.js"
+    "create-admin": "node scripts/create-admin.js",
+    "check-storage": "node scripts/setup-storage.js",
+    "migrate-storage": "node scripts/migrate-to-supabase.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
