@@ -61,6 +61,37 @@ router.get('/', requireAdmin, async (req, res, next) => {
 });
 
 /**
+ * GET /api/media/storage-status (Live Supabase Storage check)
+ */
+router.get('/storage-status', requireAdmin, async (req, res, next) => {
+  try {
+    let hasMediaBucket = false;
+    let buckets = [];
+    let error = null;
+
+    if (supabase) {
+      const { data, error: bErr } = await supabase.storage.listBuckets();
+      if (!bErr && data) {
+        buckets = data.map(b => b.name);
+        hasMediaBucket = buckets.includes('media');
+      } else if (bErr) {
+        error = bErr.message;
+      }
+    }
+
+    res.json({
+      success: true,
+      isSupabaseConnected: Boolean(supabase),
+      hasMediaBucket,
+      buckets,
+      error
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
  * POST /api/media/upload
  * Supports uploading from any mobile or desktop device.
  * Stores in Supabase Storage if bucket exists, with fallback to local server.
@@ -79,6 +110,14 @@ router.post('/upload', requireAdmin, upload.single('image'), async (req, res, ne
     // 1. Attempt upload to Supabase Storage for persistent cloud hosting
     if (supabase) {
       try {
+        if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+          try {
+            await supabase.storage.createBucket('media', { public: true });
+          } catch (createErr) {
+            // Bucket already exists or cannot create
+          }
+        }
+
         const fileBuffer = fs.readFileSync(req.file.path);
         const { data: uploadData, error: uploadErr } = await supabase.storage
           .from('media')
@@ -97,10 +136,10 @@ router.post('/upload', requireAdmin, upload.single('image'), async (req, res, ne
             console.log('✅ Uploaded picture directly to Supabase Storage CDN:', fileUrl);
           }
         } else if (uploadErr) {
-          console.warn('Supabase Storage bucket upload skipped:', uploadErr.message);
+          console.warn('⚠️ Supabase Storage upload skipped:', uploadErr.message);
         }
       } catch (sbErr) {
-        console.warn('Supabase Storage upload warning:', sbErr.message);
+        console.warn('⚠️ Supabase Storage upload error:', sbErr.message);
       }
     }
 
@@ -117,7 +156,12 @@ router.post('/upload', requireAdmin, upload.single('image'), async (req, res, ne
     );
 
     const created = await queryOne('SELECT * FROM media_library WHERE id = $1', [id]);
-    res.status(201).json({ success: true, file: created, url: fileUrl });
+    res.status(201).json({
+      success: true,
+      file: created,
+      url: fileUrl,
+      storageEngine: fileUrl.includes('supabase.co') ? 'supabase' : 'local'
+    });
   } catch (err) {
     next(err);
   }

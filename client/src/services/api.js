@@ -107,6 +107,7 @@ export const api = {
   markAllNotificationsRead: () => request('/api/notifications/read-all', { method: 'PATCH' }),
 
   getMediaLibrary: () => request('/api/media'),
+  getStorageStatus: () => request('/api/media/storage-status'),
   deleteMedia: (id) => request(`/api/media/${id}`, { method: 'DELETE' }),
   deleteMediaByUrl: (url) => request('/api/media/delete-by-url', { method: 'POST', body: JSON.stringify({ url }) }),
   uploadMedia: async (file) => {

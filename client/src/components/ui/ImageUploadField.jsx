@@ -137,10 +137,21 @@ export default function ImageUploadField({
           {/* Info & Action Buttons */}
           <div className="flex-1 min-w-0 space-y-2 text-center sm:text-left">
             <div>
-              <div className="text-xs font-medium text-farm-forest dark:text-white truncate">
-                {value.includes('/uploads/') || value.includes('/storage/v1/object/') ? 'Direct Device Upload' : 'Custom Image'}
+              <div className="flex items-center gap-2 justify-center sm:justify-start">
+                {value.includes('supabase.co') ? (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 text-[10px] font-semibold border border-emerald-300 dark:border-emerald-800">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Supabase Cloud Storage (CDN)
+                  </span>
+                ) : value.includes('/uploads/') ? (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 text-[10px] font-semibold border border-amber-300 dark:border-amber-800">
+                    Local Storage (Create 'media' bucket in Supabase)
+                  </span>
+                ) : (
+                  <span className="text-xs font-medium text-farm-forest dark:text-white">Custom Image URL</span>
+                )}
               </div>
-              <div className="text-[11px] text-gray-500 font-mono truncate max-w-xs sm:max-w-md">
+              <div className="text-[11px] text-gray-500 font-mono truncate max-w-xs sm:max-w-md mt-1">
                 {value}
               </div>
             </div>
