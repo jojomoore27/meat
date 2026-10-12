@@ -25,6 +25,8 @@ import dashboardRoutes from './routes/dashboard.js';
 // Middleware & DB
 import { sanitizeBody } from './middleware/validator.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { connectDb } from './config/db.js';
+import { initializeDatabase, ensureDefaultAdmin } from './database/init.js';
 import { seedDatabase } from './database/seed.js';
 
 dotenv.config();
@@ -88,6 +90,14 @@ if (!fs.existsSync(uploadsDir)) {
 }
 app.use('/uploads', express.static(uploadsDir));
 
+// Anti-caching headers on dynamic API routes to prevent stale UI after deletions
+app.use('/api', (req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
@@ -119,8 +129,19 @@ app.use(errorHandler);
 // Bootstrap Server & DB
 async function startServer() {
   try {
-    console.log('📦 Bootstrapping database...');
-    await seedDatabase();
+    console.log('🔌 Connecting to database...');
+    await connectDb();
+
+    console.log('📦 Initializing database schema...');
+    await initializeDatabase();
+    await ensureDefaultAdmin();
+
+    // Guard: Only seed if explicitly requested via environment variable.
+    // Never re-seed on ordinary server reboots or Render wake-ups to protect deleted posts.
+    if (process.env.SEED_ON_BOOT === 'true') {
+      console.log('🌱 Explicit SEED_ON_BOOT flag enabled. Running database seeder...');
+      await seedDatabase();
+    }
 
     app.listen(PORT, () => {
       console.log(`🚀 BestGrassFedCattle Server running on http://localhost:${PORT}`);

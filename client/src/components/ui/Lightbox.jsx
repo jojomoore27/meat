@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { resolveImageUrl } from '../../utils/apiUrl';
+import { DEFAULT_HERO_IMAGE } from '../../constants/media';
 
 export default function Lightbox({ images, currentIndex, isOpen, onClose, onPrev, onNext }) {
   if (!isOpen || !images || images.length === 0) return null;
@@ -43,11 +44,11 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onPrev
       {/* Main Image Container */}
       <div className="max-w-5xl max-h-[85vh] flex flex-col items-center">
         <img
-          src={resolveImageUrl(current.image_url || current.url) || '/images/hero_cattle_pasture.jpg'}
+          src={resolveImageUrl(current.image_url || current.url) || DEFAULT_HERO_IMAGE}
           alt={current.title}
           onError={(e) => {
             e.currentTarget.onerror = null;
-            e.currentTarget.src = '/images/hero_cattle_pasture.jpg';
+            e.currentTarget.src = DEFAULT_HERO_IMAGE;
           }}
           className="max-h-[75vh] w-auto object-contain rounded-xl shadow-2xl"
         />

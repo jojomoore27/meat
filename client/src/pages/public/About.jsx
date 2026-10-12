@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, HeartHandshake, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { SUPABASE_MEDIA } from '../../constants/media';
 
 export default function About() {
   return (
@@ -22,12 +23,8 @@ export default function About() {
       {/* Hero Visual Banner */}
       <div className="rounded-3xl overflow-hidden shadow-2xl border border-farm-sand/40 dark:border-white/5 aspect-[21/9]">
         <img
-          src="/images/hero_cattle_pasture.jpg"
-          alt="Rolling pasture hills in Kansas"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1600&q=85';
-          }}
+          src={SUPABASE_MEDIA.strip}
+          alt="Artisanal New York strip steak cuts"
           className="w-full h-full object-cover"
         />
       </div>
@@ -96,12 +93,8 @@ export default function About() {
 
         <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
           <img
-            src="/images/farmer_cattle_field.jpg"
-            alt="American cattle farmer with grazing herd in Kansas pasture"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = '/images/hero_cattle_pasture.jpg';
-            }}
+            src={SUPABASE_MEDIA.roast}
+            alt="Heritage pasture beef roast cuts"
             className="w-full h-full object-cover"
           />
         </div>

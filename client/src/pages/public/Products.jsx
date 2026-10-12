@@ -4,6 +4,7 @@ import { Search, ShoppingBag, Filter, ArrowUpDown, Sparkles, AlertCircle } from 
 import { api } from '../../services/api';
 import { getWhatsAppOrderUrl } from '../../utils/whatsapp';
 import { resolveImageUrl } from '../../utils/apiUrl';
+import { DEFAULT_PRODUCT_IMAGE } from '../../constants/media';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -211,11 +212,11 @@ export default function Products() {
               {/* Image & Price */}
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/20">
                 <img
-                  src={resolveImageUrl(product.main_image) || '/images/artisanal_ribeye_steak.jpg'}
+                  src={resolveImageUrl(product.main_image) || DEFAULT_PRODUCT_IMAGE}
                   alt={product.name}
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                    e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
                   }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />

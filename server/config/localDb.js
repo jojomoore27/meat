@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { pullFromSupabaseCloud, pushMutationToSupabase } from '../services/supabaseSync.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,8 @@ let db = {
   notification_settings: [],
   admin_notifications: [],
   notification_logs: [],
+  failed_media_cleanups: [],
+  deleted_records: [],
 };
 
 // Load existing data if file exists
@@ -32,6 +35,20 @@ function loadDb() {
     if (fs.existsSync(dbFile)) {
       const raw = fs.readFileSync(dbFile, 'utf8');
       db = { ...db, ...JSON.parse(raw) };
+      if (!Array.isArray(db.deleted_records)) {
+        db.deleted_records = [];
+      }
+
+      // Authoritative tombstone purge: permanently eliminate any deleted record
+      // even if an older JSON backup or Git snapshot contains it
+      if (db.deleted_records.length > 0) {
+        const deletedSet = new Set(db.deleted_records);
+        for (const tableName of Object.keys(db)) {
+          if (Array.isArray(db[tableName]) && tableName !== 'deleted_records') {
+            db[tableName] = db[tableName].filter(r => !r || !r.id || !deletedSet.has(r.id));
+          }
+        }
+      }
     }
   } catch (err) {
     console.warn('Could not read local_db.json, starting with fresh in-memory state:', err.message);
@@ -51,6 +68,13 @@ function saveDb() {
 }
 
 loadDb();
+
+export async function initializeLocalDbWithCloud() {
+  const synced = await pullFromSupabaseCloud(db);
+  if (synced) {
+    saveDb();
+  }
+}
 
 export function getTable(tableName) {
   if (!db[tableName]) {
@@ -95,8 +119,15 @@ export function executeLocalSql(sql, params = []) {
       record[col] = val !== undefined ? val : null;
     });
 
+    // Block recreation of previously deleted record IDs
+    if (record.id && db.deleted_records && db.deleted_records.includes(record.id)) {
+      console.warn(`⚠️ Blocked attempt to recreate previously deleted record ID: ${record.id}`);
+      return { rows: [], rowCount: 0 };
+    }
+
     table.push(record);
     saveDb();
+    pushMutationToSupabase(tableName, 'insert', record);
     return { rows: [record], rowCount: 1 };
   }
 
@@ -180,6 +211,7 @@ export function executeLocalSql(sql, params = []) {
         // Parse set assignments
         applySet(record, setClause, params);
         updatedCount++;
+        pushMutationToSupabase(tableName, 'update', record);
       }
     });
 
@@ -196,6 +228,19 @@ export function executeLocalSql(sql, params = []) {
     const table = getTable(tableName);
 
     const initialLen = table.length;
+    const recordsToDelete = table.filter(record => whereClause && testWhere(record, whereClause, params));
+
+    // Register deleted record IDs into permanent tombstone list
+    if (!db.deleted_records) db.deleted_records = [];
+    recordsToDelete.forEach(r => {
+      if (r && r.id) {
+        if (!db.deleted_records.includes(r.id)) {
+          db.deleted_records.push(r.id);
+        }
+        pushMutationToSupabase(tableName, 'delete', null, r.id);
+      }
+    });
+
     db[tableName] = table.filter(record => {
       if (!whereClause) return false;
       return !testWhere(record, whereClause, params);
@@ -203,7 +248,7 @@ export function executeLocalSql(sql, params = []) {
 
     const removed = initialLen - db[tableName].length;
     if (removed > 0) saveDb();
-    return { rows: [], rowCount: removed };
+    return { rows: recordsToDelete, rowCount: removed };
   }
 
   return { rows: [], rowCount: 0 };

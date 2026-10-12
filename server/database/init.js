@@ -8,13 +8,18 @@ export async function initializeDatabase() {
   // Compatible schema execution for SQLite & PostgreSQL
   const isPostgres = getDbMode() === 'postgres';
 
-  const idType = isPostgres ? 'UUID PRIMARY KEY DEFAULT uuid_generate_v4()' : 'TEXT PRIMARY KEY';
+  if (isPostgres) {
+    try {
+      await query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
+      await query('CREATE EXTENSION IF NOT EXISTS "pgcrypto";');
+    } catch (e) {
+      console.warn('Note: uuid extension check completed, using built-in gen_random_uuid().');
+    }
+  }
+
+  const idType = isPostgres ? 'UUID PRIMARY KEY DEFAULT gen_random_uuid()' : 'TEXT PRIMARY KEY';
   const jsonType = isPostgres ? 'JSONB' : 'TEXT';
   const timestampType = isPostgres ? 'TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP' : 'DATETIME DEFAULT CURRENT_TIMESTAMP';
-
-  if (isPostgres) {
-    await query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
-  }
 
   // 1. Admins
   await query(`
@@ -265,5 +270,36 @@ export async function initializeDatabase() {
     )
   `);
 
+  // 16. Failed Media Cleanups (Retry Queue)
+  await query(`
+    CREATE TABLE IF NOT EXISTS failed_media_cleanups (
+      id ${idType},
+      file_url TEXT NOT NULL,
+      storage_key TEXT,
+      error_message TEXT,
+      retry_count INTEGER DEFAULT 0,
+      status TEXT DEFAULT 'pending',
+      created_at ${timestampType},
+      updated_at ${timestampType}
+    )
+  `);
+
   console.log('✅ Database tables initialized successfully.');
 }
+
+/**
+ * Initializes default admin if no administrators exist yet.
+ * Never overwrites or modifies existing administrators.
+ */
+export async function ensureDefaultAdmin() {
+  const existingAdmin = await query('SELECT id FROM admins LIMIT 1');
+  if (!existingAdmin.rows || existingAdmin.rows.length === 0) {
+    const passwordHash = await bcrypt.hash('Password123!', 12);
+    await query(
+      'INSERT INTO admins (id, username, email, password_hash, role) VALUES ($1, $2, $3, $4, $5)',
+      [uuidv4(), 'admin', 'admin@bestgrassfedcattle.com', passwordHash, 'superadmin']
+    );
+    console.log('👤 Initial default admin created: admin / Password123!');
+  }
+}
+

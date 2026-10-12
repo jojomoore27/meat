@@ -15,6 +15,7 @@ import {
 import { api } from '../../services/api';
 import { getWhatsAppOrderUrl } from '../../utils/whatsapp';
 import { resolveImageUrl } from '../../utils/apiUrl';
+import { DEFAULT_PRODUCT_IMAGE, DEFAULT_HERO_IMAGE, SUPABASE_MEDIA } from '../../constants/media';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -68,7 +69,7 @@ export default function Home() {
     subheadline: 'Quality beef from carefully raised cattle in Kansas, presented with the care and standards customers expect from a premium American beef brand.',
     ctaPrimaryText: 'Explore Our Beef',
     ctaSecondaryText: 'Order Beef',
-    heroImage: '/images/hero_cattle_pasture.jpg'
+    heroImage: DEFAULT_HERO_IMAGE
   };
 
   const trustContent = cmsData?.sections?.home_trust || {
@@ -90,11 +91,11 @@ export default function Home() {
         {/* Background Image with Warm Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src={heroContent.heroImage || '/images/hero_cattle_pasture.jpg'}
-            alt="Cattle grazing in Kansas pastures"
+            src={heroContent.heroImage || DEFAULT_HERO_IMAGE}
+            alt="Authentic grass-fed cattle beef"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = '/images/hero_cattle_pasture.jpg';
+              e.currentTarget.src = DEFAULT_HERO_IMAGE;
             }}
             className="w-full h-full object-cover object-center filter brightness-[0.72] contrast-[1.05] transform scale-105 transition-transform duration-1000"
           />
@@ -240,11 +241,11 @@ export default function Home() {
               {/* Image & Badges */}
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/20">
                 <img
-                  src={resolveImageUrl(product.main_image) || '/images/artisanal_ribeye_steak.jpg'}
+                  src={resolveImageUrl(product.main_image) || DEFAULT_PRODUCT_IMAGE}
                   alt={product.name}
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                    e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
                   }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -367,22 +368,22 @@ export default function Home() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-[#151c17]">
                 <img
-                  src="/images/farmer_cattle_field.jpg"
-                  alt="American cattle farmer with grazing herd in Kansas"
+                  src={SUPABASE_MEDIA.roast}
+                  alt="Authentic Kansas heritage beef roast cut"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = '/images/hero_cattle_pasture.jpg';
+                    e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
                   }}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="hidden sm:block absolute -bottom-8 -left-8 w-48 h-48 rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-[#151c17]">
                 <img
-                  src="/images/artisanal_ribeye_steak.jpg"
-                  alt="Artisanal dry aged ribeye"
+                  src={SUPABASE_MEDIA.strip}
+                  alt="Artisanal New York strip steak cut"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = '/images/farmer_cattle_field.jpg';
+                    e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
                   }}
                   className="w-full h-full object-cover"
                 />

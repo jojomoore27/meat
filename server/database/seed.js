@@ -3,8 +3,29 @@ import { initializeDatabase } from './init.js';
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
-export async function seedDatabase() {
+const SUPABASE_CDN_IMAGES = {
+  tbone: 'https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/1791760498806_743.jpeg',
+  strip: 'https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/1791760712306_824.jpeg',
+  roast: 'https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/1791760535942_487.jpeg',
+  liver: 'https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/1791760448940_685.jpeg',
+  tongue: 'https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/1791760412733_820.jpeg',
+  bones1: 'https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/1791760328383_39.jpeg',
+  bones2: 'https://vorsgkntunffzgulwumc.supabase.co/storage/v1/object/public/media/1791760576218_675.jpeg'
+};
+
+export async function seedDatabase(options = {}) {
   await initializeDatabase();
+
+  // Guard: if database already has live products or gallery, do NOT re-seed to preserve deletions and edits
+  if (!options.force) {
+    const existingProducts = await query('SELECT id FROM products LIMIT 1');
+    const existingGallery = await query('SELECT id FROM gallery_images LIMIT 1');
+    if ((existingProducts.rows && existingProducts.rows.length > 0) || (existingGallery.rows && existingGallery.rows.length > 0)) {
+      console.log('ℹ️ Database already contains live content. Skipping seed to preserve deletions and custom edits.');
+      return;
+    }
+  }
+
   console.log('🌱 Seeding database with authentic cattle farm content...');
 
   // 1. Seed Admin
@@ -55,146 +76,126 @@ export async function seedDatabase() {
     }
   }
 
-  // 3. Seed Products
+  // 3. Seed Products using ONLY authentic Supabase photos
   const productsData = [
     {
-      name: 'Dry-Aged Ribeye Steak',
-      slug: 'dry-aged-ribeye-steak',
-      sku: 'BGC-RIB-001',
+      name: 'Prime T-Bone / Porterhouse Steak',
+      slug: 't-bone-porterhouse-steak',
+      sku: 'BGC-TBN-001',
       categorySlug: 't-bone-porterhouse',
-      price: 34.50,
-      short_description: '21-day dry aged, rich pasture marbling, intensely flavorful and tender.',
-      full_description: 'Our signature cut. Raised entirely on Kansas pastures with zero grain, hormones, or feedlot confinement. Aged 21 days for maximum concentration of umami and tenderness. Best prepared in a cast-iron skillet with rosemary and pasture butter.',
-      main_image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=800&q=80',
-      additional_images: JSON.stringify([
-        'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
-        'https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80'
-      ]),
+      price: 36.50,
+      short_description: 'Prime bone-in T-Bone and Porterhouse cuts with tenderloin included. 100% pasture-raised.',
+      full_description: 'Our premier bone-in steak featuring both the tender filet mignon and flavorful strip loin separated by the classic T-bone. Raised 100% on open Kansas pastures with zero grain, antibiotics, or hormones. Dry-aged to perfection.',
+      main_image: SUPABASE_CDN_IMAGES.tbone,
+      additional_images: JSON.stringify([SUPABASE_CDN_IMAGES.strip]),
       status: 'published',
       is_featured: 1,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
-      seo_title: '100% Grass-Fed Dry-Aged Ribeye Steak | BestGrassFedCattle',
-      seo_description: 'Order authentic 21-day dry aged grass-fed ribeye steak from our Kansas farm.'
+      cut_options: JSON.stringify(['1.25 inch thick cut', '1.5 inch thick cut', '2.0 inch cowboy cut']),
+      specifications: JSON.stringify({ 'Aging': '21-day dry aged', 'Feeding': '100% Grass-Fed & Finished', 'Packaging': 'Individually vacuum sealed' }),
+      seo_title: '100% Grass-Fed T-Bone & Porterhouse Steak | BestGrassFedCattle',
+      seo_description: 'Order authentic bone-in grass-fed T-Bone and Porterhouse steaks from our Kansas farm.'
     },
     {
-      name: 'New York Strip Steak',
-      slug: 'new-york-strip-steak',
+      name: 'Artisanal New York Strip Steaks',
+      slug: 'artisanal-new-york-strip-steaks',
       sku: 'BGC-NYS-002',
       categorySlug: 'new-york-strip-steaks',
-      price: 31.00,
-      short_description: 'Classic American strip steak with clean, robust beef flavor and fine marbling.',
-      full_description: 'Hand-trimmed from the short loin, our New York Strip embodies what authentic grass-fed beef tastes like: clean, mineral-rich, robustly beefy with a delicate fat cap that renders beautifully under high heat.',
-      main_image: 'https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80',
-      additional_images: JSON.stringify([]),
+      price: 32.00,
+      short_description: 'Tender, robustly marbled New York strip steaks with distinct pasture depth.',
+      full_description: 'Hand-trimmed from the short loin, our New York Strip embodies authentic grass-fed beef: clean mineral richness, fine marbling, and a delicate fat cap that crisps to golden perfection.',
+      main_image: SUPABASE_CDN_IMAGES.strip,
+      additional_images: JSON.stringify([SUPABASE_CDN_IMAGES.tbone]),
       status: 'published',
       is_featured: 1,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
+      cut_options: JSON.stringify(['1.0 inch cut', '1.25 inch cut', '1.5 inch thick cut']),
+      specifications: JSON.stringify({ 'Aging': '21-day dry aged', 'Feeding': '100% Grass-Fed', 'Origin': 'Kansas, USA' }),
       seo_title: 'Grass-Fed New York Strip Steak | BestGrassFedCattle',
-      seo_description: 'Artisanal grass-fed New York Strip steak from Kansas pastures.'
+      seo_description: 'Pasture-raised artisanal New York Strip steaks from Kansas grasslands.'
     },
     {
-      name: 'Pasture-Raised Filet Mignon',
-      slug: 'pasture-raised-filet-mignon',
-      sku: 'BGC-FIL-003',
-      categorySlug: 't-bone-porterhouse',
-      price: 42.00,
-      short_description: 'Melt-in-your-mouth tenderness, center-cut tenderloin with delicate sweetness.',
-      full_description: 'The most tender muscle in the steer. Because our cattle roam freely on lush clover and rye pastures, this tenderloin develops an extraordinary clean, sweet flavor profile without the muddy taste of conventional feedlot beef.',
-      main_image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
-      additional_images: JSON.stringify([]),
-      status: 'published',
-      is_featured: 1,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
-      seo_title: 'Pasture-Raised Filet Mignon | BestGrassFedCattle',
-      seo_description: 'Center-cut grass-fed filet mignon tenderloin.'
-    },
-    {
-      name: '100% Grass-Fed Ground Beef (85/15)',
-      slug: 'grass-fed-ground-beef-85-15',
-      sku: 'BGC-GRD-004',
-      categorySlug: 'ground-beef',
-      price: 11.50,
-      short_description: 'Freshly ground coarse blend of brisket, chuck, and round. Pure and versatile.',
-      full_description: 'Ground only from whole muscle cuts of our pasture-raised cattle. No fillers, no trimmings, no ammonia washes. Perfect for artisan burgers, bolognese, chili, and weeknight family dinners.',
-      main_image: 'https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=800&q=80',
-      additional_images: JSON.stringify([]),
-      status: 'published',
-      is_featured: 1,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
-      seo_title: '100% Grass-Fed Ground Beef 85/15 | BestGrassFedCattle',
-      seo_description: 'Pure pasture-raised grass-fed ground beef.'
-    },
-    {
-      name: 'Heritage Chuck Pot Roast',
-      slug: 'heritage-chuck-pot-roast',
-      sku: 'BGC-CHK-005',
+      name: 'Heritage Marbled Chuck Roast',
+      slug: 'heritage-marbled-chuck-roast',
+      sku: 'BGC-CHK-003',
       categorySlug: 'chuck-roasts',
-      price: 18.00,
-      short_description: 'Generously marbled shoulder cut, transforms into fork-tender richness when braised.',
-      full_description: 'The centerpiece of Sunday dinners. Abundant connective tissue that gently dissolves into gelatin during slow simmering with root vegetables, red wine, and farm thyme.',
-      main_image: 'https://images.unsplash.com/photo-1588347818036-558601350947?auto=format&fit=crop&w=800&q=80',
+      price: 19.50,
+      short_description: 'Generously marbled shoulder roast; renders into fork-tender richness when slow-braised.',
+      full_description: 'The foundation of hearty Sunday family dinners. Rich connective tissue and natural pasture marbling gently melt into rich collagen broth during low-and-slow roasting with root herbs and garlic.',
+      main_image: SUPABASE_CDN_IMAGES.roast,
       additional_images: JSON.stringify([]),
       status: 'published',
-      is_featured: 0,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
+      is_featured: 1,
+      cut_options: JSON.stringify(['3-4 lb Roast', '4-5 lb Roast']),
+      specifications: JSON.stringify({ 'Cut': 'Shoulder Chuck', 'Recommended Cooking': 'Slow Braise, Pot Roast, Dutch Oven' }),
       seo_title: 'Grass-Fed Chuck Pot Roast | BestGrassFedCattle',
-      seo_description: 'Slow-braised heritage grass-fed chuck roast.'
+      seo_description: 'Artisanal slow-braising grass-fed chuck roast from Kansas cattle.'
     },
     {
-      name: 'English Cut Short Ribs',
-      slug: 'english-cut-short-ribs',
-      sku: 'BGC-RIB-006',
-      categorySlug: 'short-ribs',
-      price: 22.00,
-      short_description: 'Thick, meaty bone-in short ribs with deep beef richness.',
-      full_description: 'Cut across the rib bone into generous 3-inch portions. When braised in stock and herbs, the meat falls away effortlessly from the bone, offering unmatched richness and collagen.',
-      main_image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
+      name: 'Pasture-Raised Fresh Beef Liver',
+      slug: 'pasture-raised-fresh-beef-liver',
+      sku: 'BGC-LVR-004',
+      categorySlug: 'liver',
+      price: 12.00,
+      short_description: 'Nutrient-dense, iron-rich fresh beef liver from 100% pasture-grazed cattle.',
+      full_description: 'Nature’s most concentrated superfood. Clean, sweet, and mild because our cattle eat only organic pasture forage with zero feedlot grain or chemical concentrates. Flash frozen at peak freshness.',
+      main_image: SUPABASE_CDN_IMAGES.liver,
+      additional_images: JSON.stringify([]),
+      status: 'published',
+      is_featured: 1,
+      cut_options: JSON.stringify(['1 lb Pack (Sliced)', '2 lb Whole Pack']),
+      specifications: JSON.stringify({ 'Nutrients': 'Rich in Vitamin A, B12, Iron, CoQ10', 'Diet': '100% Pasture Forage' }),
+      seo_title: '100% Grass-Fed Beef Liver | BestGrassFedCattle',
+      seo_description: 'Pure nutrient-dense grass-fed beef liver from our Kansas pastures.'
+    },
+    {
+      name: 'Artisanal Beef Tongue Delicacy',
+      slug: 'artisanal-beef-tongue-delicacy',
+      sku: 'BGC-TNG-005',
+      categorySlug: 'tongue',
+      price: 18.00,
+      short_description: 'Prized tender cut with silky texture, ideal for gourmet slow braises and tacos.',
+      full_description: 'Highly sought after by culinary masters. When braised gently with bay leaves, onion, and spices, this delicacy cut yields exceptionally tender, flavorful meat perfect for gourmet Lengua dishes.',
+      main_image: SUPABASE_CDN_IMAGES.tongue,
       additional_images: JSON.stringify([]),
       status: 'published',
       is_featured: 0,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
-      seo_title: 'English Cut Grass-Fed Short Ribs | BestGrassFedCattle',
-      seo_description: 'Bone-in artisanal grass-fed short ribs.'
+      cut_options: JSON.stringify(['Whole Tongue (~2.5-3.5 lbs)']),
+      specifications: JSON.stringify({ 'Preparation': 'Slow simmer or braise', 'Handling': 'Hand-trimmed and cryovac packed' }),
+      seo_title: 'Grass-Fed Beef Tongue | BestGrassFedCattle',
+      seo_description: 'Artisanal grass-fed beef tongue for gourmet braising.'
     },
     {
       name: 'Artisan Beef Marrow Bones & Oxtail Pack',
-      slug: 'beef-marrow-bones-oxtail-pack',
-      sku: 'BGC-BON-007',
+      slug: 'artisan-beef-marrow-bones-oxtail-pack',
+      sku: 'BGC-BON-006',
       categorySlug: 'soup-bones-oxtail',
-      price: 14.00,
-      short_description: 'Femur pipe bones and collagen-rich oxtail for deep, gelatinous bone broths.',
-      full_description: 'Grass-fed bones yield broth with exceptional depth, golden fat, and high collagen density. Roast first for caramelized richness before a 24-hour slow simmer.',
-      main_image: '/images/artisanal_ribeye_steak.jpg',
-      additional_images: JSON.stringify([]),
-      status: 'published',
-      is_featured: 0,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
-      seo_title: 'Grass-Fed Marrow Bones & Oxtail | BestGrassFedCattle',
-      seo_description: 'Nutrient-dense grass-fed marrow bones for roasting and broths.'
-    },
-    {
-      name: 'Quarter Beef Share (Bulk Reserve)',
-      slug: 'quarter-beef-share-bulk',
-      sku: 'BGC-BLK-008',
-      categorySlug: 'stew-meat-kabob-cubes',
-      price: 1250.00,
-      short_description: 'Approx 100-110 lbs of packaged beef: steaks, roasts, ground beef, and ribs.',
-      full_description: 'Our most economical option for families and serious food lovers. A balanced assortment of prime steaks (Ribeye, Strip, Filet), roasts (Chuck, Brisket, Sirloin Tip), braising cuts, and ground beef. Custom cut specifications available upon inquiry.',
-      main_image: '/images/farmer_cattle_field.jpg',
-      additional_images: JSON.stringify([]),
+      price: 15.00,
+      short_description: 'Pipe marrow bones and collagen-rich oxtail sections for rich, golden bone broths.',
+      full_description: 'Dense femur pipe bones packed with golden marrow and gelatinous oxtail sections. Roasting first yields aromatic golden fat and deep umami before simmering into healing broths.',
+      main_image: SUPABASE_CDN_IMAGES.bones1,
+      additional_images: JSON.stringify([SUPABASE_CDN_IMAGES.bones2]),
       status: 'published',
       is_featured: 1,
-      cut_options: JSON.stringify([]),
-      specifications: JSON.stringify({}),
-      seo_title: 'Quarter Beef Share (Bulk Order) | BestGrassFedCattle',
-      seo_description: 'Direct farm quarter beef share reserve.'
+      cut_options: JSON.stringify(['3 lb Broth Pack', '5 lb Value Broth Pack']),
+      specifications: JSON.stringify({ 'Usage': 'Bone Broth, Soup, Roasting', 'Source': '100% Pasture Cattle' }),
+      seo_title: 'Grass-Fed Marrow Bones & Oxtail | BestGrassFedCattle',
+      seo_description: 'Dense nutrient-rich marrow bones and oxtail for collagen broths.'
+    },
+    {
+      name: 'Center-Cut Beef Shank (Osso Buco)',
+      slug: 'center-cut-beef-shank-osso-buco',
+      sku: 'BGC-SHK-007',
+      categorySlug: 'shank-osso-buco',
+      price: 21.00,
+      short_description: 'Cross-cut beef shanks with centerpiece marrow bone for authentic Osso Buco.',
+      full_description: 'Cross-cut across the bone, exposing the rich center marrow surrounded by lean muscle. Braising slowly in wine and pasture broth creates a decadent sauce and fall-apart tender beef.',
+      main_image: SUPABASE_CDN_IMAGES.bones2,
+      additional_images: JSON.stringify([SUPABASE_CDN_IMAGES.bones1]),
+      status: 'published',
+      is_featured: 0,
+      cut_options: JSON.stringify(['2-Pack (approx 2 lbs)', '4-Pack Family Cut']),
+      specifications: JSON.stringify({ 'Cut': 'Cross-cut center shank', 'Cuisine': 'Osso Buco, Stews, Braises' }),
+      seo_title: 'Grass-Fed Beef Shank Osso Buco | BestGrassFedCattle',
+      seo_description: 'Center-cut grass-fed beef shank with marrow bone for Osso Buco.'
     }
   ];
 
@@ -256,44 +257,15 @@ export async function seedDatabase() {
     }
   }
 
-  // 5. Seed Testimonials
-  const testimonialsData = [
-    {
-      customer_name: 'Executive Chef Marcus Vance',
-      customer_role: 'Manhattan Farm-to-Table Hospitality Group',
-      quote: 'The marbling and mineral clean finish on BestGrassFedCattle’s ribeye cuts set a new standard for our steak program. Our guests notice the difference immediately.',
-      photo_url: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=400&q=80',
-      is_featured: 1,
-      sort_order: 1
-    },
-    {
-      customer_name: 'Sarah & David Jenkins',
-      customer_role: 'Quarter Share Beef Customer (Westchester, NY)',
-      quote: 'We ordered a quarter beef share for our deep freezer. Every single cut—from the ground beef to the tenderloin roasts—has been exceptional. The direct communication made everything seamless.',
-      photo_url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
-      is_featured: 1,
-      sort_order: 2
-    }
-  ];
-
-  for (const t of testimonialsData) {
-    const existing = await queryOne('SELECT * FROM testimonials WHERE customer_name = $1', [t.customer_name]);
-    if (!existing) {
-      await query(
-        'INSERT INTO testimonials (id, customer_name, customer_role, quote, photo_url, is_featured, sort_order) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-        [uuidv4(), t.customer_name, t.customer_role, t.quote, t.photo_url, t.is_featured, t.sort_order]
-      );
-    }
-  }
-
-  // 6. Seed Gallery
+  // 5. Seed Gallery using ONLY authentic Supabase photos
   const galleryData = [
-    { title: 'Black Angus Cattle Grazing in Morning Pasture', category: 'cattle', url: '/images/hero_cattle_pasture.jpg', is_featured: 1, sort: 1 },
-    { title: 'Rolling Kansas Clover & Grasslands', category: 'grassland', url: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80', is_featured: 1, sort: 2 },
-    { title: 'Artisanal Dry-Aged Ribeye Hand Trimmed', category: 'beef', url: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=1200&q=80', is_featured: 1, sort: 3 },
-    { title: 'Pasture Management & Rotational Fencing', category: 'farm', url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80', is_featured: 0, sort: 4 },
-    { title: 'Cattle Herd Grazing at Golden Hour', category: 'cattle', url: 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=1200&q=80', is_featured: 1, sort: 5 },
-    { title: 'Butcher Cut Inspection & Marbling Check', category: 'behind_scenes', url: 'https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1200&q=80', is_featured: 0, sort: 6 }
+    { title: 'Prime Bone-In T-Bone & Porterhouse Steaks', category: 'beef', url: SUPABASE_CDN_IMAGES.tbone, is_featured: 1, sort: 1 },
+    { title: 'Artisanal New York Strip Steaks with Marbled Cap', category: 'beef', url: SUPABASE_CDN_IMAGES.strip, is_featured: 1, sort: 2 },
+    { title: 'Heritage Marbled Chuck Pot Roast Cuts', category: 'beef', url: SUPABASE_CDN_IMAGES.roast, is_featured: 1, sort: 3 },
+    { title: 'Collagen-Rich Center Marrow Bones & Oxtail', category: 'beef', url: SUPABASE_CDN_IMAGES.bones1, is_featured: 1, sort: 4 },
+    { title: 'Fresh 100% Pasture-Raised Beef Liver', category: 'beef', url: SUPABASE_CDN_IMAGES.liver, is_featured: 0, sort: 5 },
+    { title: 'Artisanal Fresh Grass-Fed Beef Tongue', category: 'beef', url: SUPABASE_CDN_IMAGES.tongue, is_featured: 0, sort: 6 },
+    { title: 'Cross-Cut Center Beef Shank (Osso Buco)', category: 'beef', url: SUPABASE_CDN_IMAGES.bones2, is_featured: 0, sort: 7 }
   ];
 
   for (const g of galleryData) {
@@ -306,7 +278,7 @@ export async function seedDatabase() {
     }
   }
 
-  // 7. Seed Site Settings
+  // 6. Seed Site Settings
   const existingSettings = await queryOne('SELECT * FROM site_settings WHERE id = $1', ['default']);
   if (!existingSettings) {
     await query(`
@@ -329,7 +301,7 @@ export async function seedDatabase() {
     `);
   }
 
-  // 8. Seed Notification Settings
+  // 7. Seed Notification Settings
   const existingNotif = await queryOne('SELECT * FROM notification_settings WHERE id = $1', ['default']);
   if (!existingNotif) {
     await query(`
@@ -342,7 +314,7 @@ export async function seedDatabase() {
     `);
   }
 
-  // 9. Seed Sample CMS Content for Live Editing
+  // 8. Seed Sample CMS Content for Live Editing
   const cmsSections = [
     {
       id: 'home_hero',
@@ -353,7 +325,7 @@ export async function seedDatabase() {
         subheadline: 'Quality beef from carefully raised cattle in Kansas, presented with the care and standards customers expect from a premium American beef brand.',
         ctaPrimaryText: 'Explore Our Beef',
         ctaSecondaryText: 'Order Beef',
-        heroImage: '/images/hero_cattle_pasture.jpg'
+        heroImage: SUPABASE_CDN_IMAGES.tbone
       })
     },
     {
@@ -383,7 +355,7 @@ export async function seedDatabase() {
     }
   }
 
-  console.log('✅ Seeding complete.');
+  console.log('✅ Seeding complete with ZERO demo images.');
 }
 
 if (process.argv[1] && process.argv[1].endsWith('seed.js')) {

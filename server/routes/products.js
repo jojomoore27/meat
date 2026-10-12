@@ -1,7 +1,7 @@
 import express from 'express';
 import { query, queryOne } from '../config/db.js';
 import { requireAdmin } from '../middleware/auth.js';
-import { permanentlyDeleteMediaFile } from '../utils/fileCleanup.js';
+import { permanentlyDeleteMediaFile, safelyDeletePostMedia } from '../utils/fileCleanup.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
@@ -249,32 +249,50 @@ router.put('/admin/:id', requireAdmin, async (req, res, next) => {
 });
 
 /**
- * DELETE /api/admin/products/:id (Delete Product)
+ * DELETE /api/admin/products/:id (Authoritative Delete Product)
  */
 router.delete('/admin/:id', requireAdmin, async (req, res, next) => {
   try {
-    const existing = await queryOne('SELECT * FROM products WHERE id = $1', [req.params.id]);
-    if (existing) {
-      if (existing.main_image) {
-        await permanentlyDeleteMediaFile(existing.main_image);
-      }
-      let additional = [];
-      try {
-        additional = typeof existing.additional_images === 'string'
-          ? JSON.parse(existing.additional_images || '[]')
-          : existing.additional_images;
-      } catch (e) {
-        additional = [];
-      }
-      if (Array.isArray(additional)) {
-        for (const img of additional) {
-          await permanentlyDeleteMediaFile(img);
-        }
+    const { id } = req.params;
+
+    // 1. Identify and verify authoritative database record
+    const existing = await queryOne('SELECT * FROM products WHERE id = $1', [id]);
+    if (!existing) {
+      return res.status(404).json({ success: false, error: 'Product not found or already deleted.' });
+    }
+
+    // 2. Perform authoritative database deletion
+    const deleteResult = await query('DELETE FROM products WHERE id = $1', [id]);
+    if (!deleteResult || deleteResult.rowCount === 0) {
+      return res.status(500).json({ success: false, error: 'Authoritative database deletion failed.' });
+    }
+
+    // 3. Delete exclusively owned media files from Supabase Storage / disk
+    if (existing.main_image) {
+      await safelyDeletePostMedia(existing.main_image, { excludeProductId: id });
+    }
+
+    let additional = [];
+    try {
+      additional = typeof existing.additional_images === 'string'
+        ? JSON.parse(existing.additional_images || '[]')
+        : existing.additional_images;
+    } catch (e) {
+      additional = [];
+    }
+
+    if (Array.isArray(additional)) {
+      for (const img of additional) {
+        await safelyDeletePostMedia(img, { excludeProductId: id });
       }
     }
 
-    await query('DELETE FROM products WHERE id = $1', [req.params.id]);
-    res.json({ success: true, message: 'Product and associated images permanently deleted' });
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.json({
+      success: true,
+      message: 'Product and associated exclusively owned images permanently deleted',
+      deletedId: id
+    });
   } catch (err) {
     next(err);
   }

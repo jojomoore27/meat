@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, ShieldCheck, Sun, Droplets, Mountain, ArrowRight } from 'lucide-react';
+import { SUPABASE_MEDIA } from '../../constants/media';
 
 export default function OurFarm() {
   return (
@@ -64,23 +65,15 @@ export default function OurFarm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
           <img
-            src="/images/hero_cattle_pasture.jpg"
-            alt="Kansas cattle pasture grazing"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=1000&q=80';
-            }}
+            src={SUPABASE_MEDIA.tbone}
+            alt="Prime T-Bone and Porterhouse cuts from Kansas pastures"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
           <img
-            src="/images/farmer_cattle_field.jpg"
-            alt="American cattle farmer with grazing cattle in Kansas pasture"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = '/images/hero_cattle_pasture.jpg';
-            }}
+            src={SUPABASE_MEDIA.roast}
+            alt="Heritage grass-fed marbled beef cuts"
             className="w-full h-full object-cover"
           />
         </div>

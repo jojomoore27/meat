@@ -3,6 +3,7 @@ import { api } from '../../services/api';
 import { Plus, Edit2, Trash2, X, Star, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import ImageUploadField from '../../components/ui/ImageUploadField';
 import { resolveImageUrl } from '../../utils/apiUrl';
+import { DEFAULT_PRODUCT_IMAGE } from '../../constants/media';
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -53,7 +54,7 @@ export default function AdminProducts() {
       price: '28.00',
       short_description: '',
       full_description: '',
-      main_image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=800&q=80',
+      main_image: DEFAULT_PRODUCT_IMAGE,
       status: 'published',
       is_featured: false,
     });
@@ -169,11 +170,11 @@ export default function AdminProducts() {
                   <tr key={p.id} className="hover:bg-gray-50/50 dark:hover:bg-white/[0.02]">
                     <td className="p-4">
                       <img
-                        src={resolveImageUrl(p.main_image) || '/images/artisanal_ribeye_steak.jpg'}
+                        src={resolveImageUrl(p.main_image) || DEFAULT_PRODUCT_IMAGE}
                         alt={p.name}
                         onError={(e) => {
                           e.currentTarget.onerror = null;
-                          e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                          e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
                         }}
                         className="w-12 h-12 object-cover rounded-lg shadow-sm"
                       />

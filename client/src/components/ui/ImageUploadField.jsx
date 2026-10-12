@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Upload, Image as ImageIcon, X, Loader2, CheckCircle2, AlertCircle, Link2 } from 'lucide-react';
 import { api } from '../../services/api';
 import { resolveImageUrl } from '../../utils/apiUrl';
+import { DEFAULT_PRODUCT_IMAGE } from '../../constants/media';
 
 export default function ImageUploadField({
   label = 'Main Image *',
@@ -125,7 +126,7 @@ export default function ImageUploadField({
               alt="Uploaded Preview"
               onError={(e) => {
                 e.currentTarget.onerror = null;
-                e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
               }}
               className="w-full h-full object-cover"
             />

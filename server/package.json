@@ -11,7 +11,9 @@
     "seed": "node database/seed.js",
     "create-admin": "node scripts/create-admin.js",
     "check-storage": "node scripts/setup-storage.js",
-    "migrate-storage": "node scripts/migrate-to-supabase.js"
+    "migrate-storage": "node scripts/migrate-to-supabase.js",
+    "clean-storage": "node scripts/clean-supabase-storage.js",
+    "test:db": "node scripts/test-db-connection.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",

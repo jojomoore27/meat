@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getApiUrl, resolveImageUrl } from '../../utils/apiUrl';
+import { DEFAULT_PRODUCT_IMAGE } from '../../constants/media';
 import { api } from '../../services/api';
 import { Upload, Trash2, Copy, Check, FileImage, Loader2 } from 'lucide-react';
 
@@ -115,7 +116,7 @@ export default function AdminMediaLibrary() {
                   alt={item.file_name}
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                    e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
                   }}
                   className="w-full h-full object-cover"
                 />

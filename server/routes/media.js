@@ -105,7 +105,7 @@ router.post('/upload', requireAdmin, upload.single('image'), async (req, res, ne
     let fileUrl = '';
     const id = uuidv4();
     const ext = path.extname(req.file.originalname).toLowerCase() || '.jpg';
-    const uniqueFileName = `${Date.now()}_${Math.floor(Math.random() * 1000)}${ext}`;
+    const uniqueFileName = `farm_${Date.now()}_${Math.floor(Math.random() * 1000)}${ext}`;
 
     // 1. Attempt upload to Supabase Storage for persistent cloud hosting
     if (supabase) {
@@ -136,10 +136,13 @@ router.post('/upload', requireAdmin, upload.single('image'), async (req, res, ne
             console.log('✅ Uploaded picture directly to Supabase Storage CDN:', fileUrl);
           }
         } else if (uploadErr) {
-          console.warn('⚠️ Supabase Storage upload skipped:', uploadErr.message);
+          console.warn('⚠️ Supabase Storage upload error:', uploadErr.message);
+          if (uploadErr.message?.includes('row-level security') || uploadErr.statusCode === '403') {
+            console.warn('   💡 Fix: Add SUPABASE_SERVICE_ROLE_KEY to your environment variables OR run the SQL policy in server/database/supabase_storage_setup.sql.');
+          }
         }
       } catch (sbErr) {
-        console.warn('⚠️ Supabase Storage upload error:', sbErr.message);
+        console.warn('⚠️ Supabase Storage upload exception:', sbErr.message);
       }
     }
 
@@ -148,6 +151,7 @@ router.post('/upload', requireAdmin, upload.single('image'), async (req, res, ne
       const host = req.get('host');
       const protocol = req.protocol === 'https' || req.get('x-forwarded-proto') === 'https' ? 'https' : 'http';
       fileUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
+      console.warn(`📁 Stored image locally (${fileUrl}) because cloud storage upload did not complete.`);
     }
 
     await query(
@@ -168,18 +172,27 @@ router.post('/upload', requireAdmin, upload.single('image'), async (req, res, ne
 });
 
 /**
- * DELETE /api/media/:id
+ * DELETE /api/media/:id (Authoritative Media Deletion)
  */
 router.delete('/:id', requireAdmin, async (req, res, next) => {
   try {
-    const item = await queryOne('SELECT * FROM media_library WHERE id = $1', [req.params.id]);
-    if (item && item.file_url) {
-      await permanentlyDeleteMediaFile(item.file_url);
-    } else {
-      await query('DELETE FROM media_library WHERE id = $1', [req.params.id]);
+    const { id } = req.params;
+    const item = await queryOne('SELECT * FROM media_library WHERE id = $1', [id]);
+    if (!item) {
+      return res.status(404).json({ success: false, error: 'Media file not found or already deleted.' });
     }
 
-    res.json({ success: true, message: 'Media file permanently deleted' });
+    const deleteResult = await query('DELETE FROM media_library WHERE id = $1', [id]);
+    if (!deleteResult || deleteResult.rowCount === 0) {
+      return res.status(500).json({ success: false, error: 'Failed to delete media record from database.' });
+    }
+
+    if (item.file_url) {
+      await permanentlyDeleteMediaFile(item.file_url, { force: true });
+    }
+
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.json({ success: true, message: 'Media file permanently deleted', deletedId: id });
   } catch (err) {
     next(err);
   }
@@ -195,7 +208,8 @@ router.post('/delete-by-url', requireAdmin, async (req, res, next) => {
       return res.status(400).json({ success: false, error: 'URL is required' });
     }
 
-    await permanentlyDeleteMediaFile(url);
+    await permanentlyDeleteMediaFile(url, { force: true });
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.json({ success: true, message: 'File permanently deleted' });
   } catch (err) {
     next(err);

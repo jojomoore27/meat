@@ -4,6 +4,7 @@ import { ArrowLeft, ShoppingBag, ShieldCheck, CheckCircle2, Share2, Flame, Award
 import { api } from '../../services/api';
 import { getWhatsAppOrderUrl } from '../../utils/whatsapp';
 import { resolveImageUrl } from '../../utils/apiUrl';
+import { DEFAULT_PRODUCT_IMAGE } from '../../constants/media';
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -81,11 +82,11 @@ export default function ProductDetail() {
         <div className="space-y-4">
           <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#151c17] border border-farm-sand/40 dark:border-white/5 shadow-2xl">
             <img
-              src={resolveImageUrl(activeImage) || '/images/artisanal_ribeye_steak.jpg'}
+              src={resolveImageUrl(activeImage) || DEFAULT_PRODUCT_IMAGE}
               alt={product.name}
               onError={(e) => {
                 e.currentTarget.onerror = null;
-                e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
               }}
               className="w-full h-full object-cover transition-all duration-300"
             />
@@ -106,7 +107,7 @@ export default function ProductDetail() {
                     alt={`Angle ${idx + 1}`}
                     onError={(e) => {
                       e.currentTarget.onerror = null;
-                      e.currentTarget.src = '/images/artisanal_ribeye_steak.jpg';
+                      e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
                     }}
                     className="w-full h-full object-cover"
                   />
