@@ -39,7 +39,7 @@ export async function seedDatabase(options = {}) {
     console.log('👤 Admin user seeded: admin / Password123!');
   }
 
-  // 2. Seed Categories (18 Specific Cuts)
+  // 2. Seed Categories (18 Specific Cuts + 4 Beef Share Sizes)
   const categoriesData = [
     { name: 'T-Bone / Porterhouse (tenderloin incl.)', slug: 't-bone-porterhouse', description: 'Prime bone-in T-Bone and Porterhouse cuts with tenderloin included.', sort_order: 1 },
     { name: 'New York Strip Steaks', slug: 'new-york-strip-steaks', description: 'Tender, robustly marbled New York strip steaks dry-aged for rich flavor.', sort_order: 2 },
@@ -58,7 +58,11 @@ export async function seedDatabase(options = {}) {
     { name: 'Liver', slug: 'liver', description: 'Nutrient-dense, iron-rich fresh beef liver from 100% pasture-grazed cattle.', sort_order: 15 },
     { name: 'Heart', slug: 'heart', description: 'Lean, clean beef heart rich in CoQ10, minerals, and restorative nutrients.', sort_order: 16 },
     { name: 'Tongue', slug: 'tongue', description: 'Tender, flavorful delicacy cut suitable for slow cooking and artisanal tacos.', sort_order: 17 },
-    { name: 'Suet / Tallow', slug: 'suet-tallow', description: 'Pure kidney suet and rendering-grade fat for rich cooking tallow and skincare.', sort_order: 18 }
+    { name: 'Suet / Tallow', slug: 'suet-tallow', description: 'Pure kidney suet and rendering-grade fat for rich cooking tallow and skincare.', sort_order: 18 },
+    { name: '1/8 of a Beef', slug: 'eighth-of-a-beef', description: 'An eighth share of a whole pasture-raised beef — ideal starter pack with a curated selection of premium steaks, roasts, and ground beef.', sort_order: 19 },
+    { name: '1/4 of a Beef', slug: 'quarter-of-a-beef', description: 'A quarter share of a whole pasture-raised beef — a generous assortment of steaks, roasts, ribs, ground beef, and specialty cuts for the dedicated home cook.', sort_order: 20 },
+    { name: '1/2 of a Beef', slug: 'half-of-a-beef', description: 'A half share of a whole pasture-raised beef — a substantial selection covering all primal cuts, perfect for families and serious beef enthusiasts.', sort_order: 21 },
+    { name: 'A Full Beef', slug: 'full-beef', description: 'A whole pasture-raised beef — the complete animal custom-butchered to your specifications. Maximum value, full freezer, total control over your cuts.', sort_order: 22 }
   ];
 
   const categoryMap = {};
